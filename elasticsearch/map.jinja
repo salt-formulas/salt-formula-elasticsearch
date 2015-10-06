@@ -1,0 +1,13 @@
+
+{% set server = salt['grains.filter_by']({
+    'Debian': {
+        'pkgs': ['elasticsearch'],
+        'service': 'elasticsearch',
+        'version': '1.4.4',
+     },
+    'RedHat': {
+        'pkgs': ['elasticsearch'],
+        'service': 'elasticsearch',
+        'version': '1.4.4',
+    },
+}, merge=salt['pillar.get']('elasticsearch:server')) %}

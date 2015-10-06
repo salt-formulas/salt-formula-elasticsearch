@@ -1,0 +1,2 @@
+elasticsearch/*             /usr/share/salt-formulas/env/elasticsearch/
+metadata/service/*      /usr/share/salt-formulas/reclass/service/elasticsearch/
