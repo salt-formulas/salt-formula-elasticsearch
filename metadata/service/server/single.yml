@@ -1,5 +1,7 @@
 applications:
 - elasticsearch
+classes:
+- service.elasticsearch.support
 parameters:
   elasticsearch:
     server:

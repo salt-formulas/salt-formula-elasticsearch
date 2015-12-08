@@ -1,6 +1,6 @@
 doc:
-  name: Elastic Search
-  description: It provides a distributed, multitenant-capable full-text search engine with a HTTP web interface and schema-free JSON documents. 
+  name: Elasticsearch
+  description: Elasticsearch provides a distributed, multitenant-capable full-text search engine with a HTTP web interface and schema-free JSON documents.
   role:
   {%- if pillar.elasticsearch.server is defined %}
     server:
