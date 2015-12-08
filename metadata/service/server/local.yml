@@ -1,0 +1,11 @@
+applications:
+- elasticsearch
+classes:
+- service.elasticsearch.support
+parameters:
+  elasticsearch:
+    server:
+      enabled: true
+      bind:
+        address: 127.0.0.1
+        port: 9200
