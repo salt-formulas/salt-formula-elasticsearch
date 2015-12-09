@@ -1,9 +1,13 @@
+{%- from "elasticsearch/map.jinja" import server with context %}
+{%- if pillar.elasticsearch.server is defined %}
 doc:
   name: Elasticsearch
   description: Elasticsearch provides a distributed, multitenant-capable full-text search engine with a HTTP web interface and schema-free JSON documents.
   role:
-  {%- if pillar.elasticsearch.server is defined %}
     server:
       name: server
-      param: {}
-  {%- endif %}
+      param:
+        bind:
+          name: Network bind
+          value: {{ server.bind.address }}:{{ server.bind.port }}
+{%- endif %}
