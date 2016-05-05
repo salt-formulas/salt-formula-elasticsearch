@@ -9,8 +9,6 @@ parameters:
       bind:
         address: 0.0.0.0
         port: 9200
-      index:
-        shards: 1
-        replicas: 0
       cluster:
-        multicast: false
+        name: elasticsearch
+        multicast: true

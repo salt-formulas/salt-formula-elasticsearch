@@ -32,10 +32,8 @@
 # multiple clusters on the same network, make sure you're using unique names.
 #
 # cluster.name: elasticsearch
-{%- if server.clustername is defined %}
-
-cluster.name: {{ server.clustername }}
-
+{%- if server.get('cluster', {}).name is defined %}
+cluster.name: {{ server.cluster.name }}
 {% endif %}
 #################################### Node #####################################
 
@@ -50,11 +48,11 @@ node.name: {{ server.get('name', '${HOSTNAME}') }}
 #
 # Allow this node to be eligible as a master node (enabled by default):
 #
-# node.master: true
+node.master: {{ server.get('master', True)|lower }}
 #
 # Allow this node to store data (enabled by default):
 #
-# node.data: true
+node.data: {{ server.get('data', True)|lower }}
 
 # You can exploit these settings to design advanced cluster topologies.
 #
@@ -89,6 +87,9 @@ node.name: {{ server.get('name', '${HOSTNAME}') }}
 # is a simple key value pair, similar to node.key: value, here is an example:
 #
 # node.rack: rack314
+{%- if server.rack is defined %}
+node.rack: {{ server.rack }}
+{%- endif %}
 
 # By default, multiple nodes are allowed to start from the same installation location
 # to disable it, set the following:
@@ -110,11 +111,11 @@ node.name: {{ server.get('name', '${HOSTNAME}') }}
 
 # Set the number of shards (splits) of an index (5 by default):
 #
-# index.number_of_shards: 5
+index.number_of_shards: {{ server.get('index', {}).get('shards', 5) }}
 
 # Set the number of replicas (additional copies) of an index (1 by default):
 #
-# index.number_of_replicas: 1
+index.number_of_replicas: {{ server.get('index', {}).get('replicas', 1) }}
 
 # Note, that for development on a local machine, with small indices, it usually
 # makes sense to "disable" the distributed features:
@@ -213,7 +214,9 @@ http.enabled: true
 # Set the address other nodes will use to communicate with this node. If not
 # set, it is automatically derived. It must point to an actual IP address.
 #
-# network.publish_host: 192.168.0.1
+{%- if server.publish_host is defined %}
+network.publish_host: {{ server.publish_host }}
+{%- endif %}
 
 # Set both 'bind_host' and 'publish_host':
 #
@@ -326,12 +329,14 @@ http.enabled: true
 #
 # 1. Disable multicast discovery (enabled by default):
 #
-# discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.multicast.enabled: {{ server.get('cluster', {}).get('multicast', True)|lower }}
 #
 # 2. Configure an initial list of master nodes in the cluster
 #    to perform discovery when new nodes (master or data) are started:
 #
-# discovery.zen.ping.unicast.hosts: ["host1", "host2:port"]
+{%- if server.get('cluster', {}).members is defined %}
+discovery.zen.ping.unicast.hosts: [{% for member in server.cluster.members %}"{{ member.host }}:{{ member.get('port', 9300) }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+{%- endif %}
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
 #

@@ -9,3 +9,8 @@ parameters:
       bind:
         address: 127.0.0.1
         port: 9200
+      index:
+        shards: 1
+        replicas: 0
+      cluster:
+        multicast: false
