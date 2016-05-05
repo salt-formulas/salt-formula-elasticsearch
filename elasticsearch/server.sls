@@ -8,6 +8,14 @@ elasticsearch_packages:
   pkg.installed:
   - names: {{ server.pkgs }}
 
+elasticsearch_default:
+  file.managed:
+  - name: /etc/default/elasticsearch
+  - source: salt://elasticsearch/files/elasticsearch
+  - template: jinja
+  - require:
+    - pkg: elasticsearch_packages
+
 elasticsearch_config:
   file.managed:
   - name: /etc/elasticsearch/elasticsearch.yml
@@ -22,5 +30,6 @@ elasticsearch_service:
   - name: {{ server.service }}
   - watch:
     - file: elasticsearch_config
+    - file: elasticsearch_default
 
 {%- endif %}
