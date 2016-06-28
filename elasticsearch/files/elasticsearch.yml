@@ -312,7 +312,7 @@ network.publish_host: {{ server.publish_host }}
 # operational within the cluster. Its recommended to set it to a higher value
 # than 1 when running more than 2 nodes in the cluster.
 #
-# discovery.zen.minimum_master_nodes: 1
+discovery.zen.minimum_master_nodes: {{ server.get('cluster', {}).minimum_master_nodes|default(1) }}
 
 # Set the time to wait for ping responses from other nodes when discovering.
 # Set this option to a higher value on a slow or congested network
