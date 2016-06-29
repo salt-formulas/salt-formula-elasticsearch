@@ -1,0 +1,8 @@
+{%- from "elasticsearch/map.jinja" import server with context -%}
+check:
+  local_elasticsearch_server_proc:
+    command: "PATH=$PATH:/usr/lib64/nagios/plugins:/usr/lib/nagios/plugins check_procs -C java -u elasticsearch -c 1:1"
+    interval: 30
+    occurrences: 3
+    subscribers:
+    - local-elasticsearch-server
