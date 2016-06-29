@@ -3,6 +3,9 @@
 
 include:
   - java
+  {%- if server.curator is defined %}
+  - elasticsearch.server.curator
+  {%- endif %}
 
 elasticsearch_packages:
   pkg.installed:

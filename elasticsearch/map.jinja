@@ -4,11 +4,15 @@
 Debian:
   pkgs:
   - elasticsearch
+  curator_pkgs:
+  - python-elasticsearch-curator
   service: elasticsearch
   version: '1.4.4'
 RedHat:
   pkgs:
   - elasticsearch
+  curator_pkgs:
+  - python-elasticsearch-curator
   service: elasticsearch
   version: '1.4.4'
 {%- endload %}
