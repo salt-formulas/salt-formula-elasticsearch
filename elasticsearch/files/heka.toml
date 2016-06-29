@@ -1,0 +1,22 @@
+{%- from "elasticsearch/map.jinja" import server with context -%}
+
+{%- if server.curator is defined and server.curator.get('logfile', '') %}
+{%- set log_dir = server.curator.logfile|replace(server.curator.logfile.split('/')[-1], "") %}
+[logstreamer_elasticsearch_curator]
+type = "LogstreamerInput"
+log_directory = "{{ log_dir }}"
+file_match = '{{ server.curator.logfile.split('/')[-1]|replace('.', '\.') }}\.?(?P<Index>\d+)?(\.gz)?'
+priority = ["^Index"]
+decoder = "Sandbox_elasticsearch_curator"
+
+[Sandbox_elasticsearch_curator]
+type = "SandboxDecoder"
+filename = "lua_decoders/json.lua"
+
+[Sandbox_elasticsearch_curator.config]
+type = "elasticsearch_curator"
+payload = "message"
+severity = "loglevel"
+timestamp = "@timestamp"
+map_fields = true
+{%- endif %}
