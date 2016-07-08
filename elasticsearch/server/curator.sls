@@ -31,6 +31,14 @@ elasticsearch_curator_cron:
     - minute: random
     - hour: 1
 
+elasticsearch_curator_cron_path:
+  cron.env_present:
+    - name: PATH
+    - user: elasticsearch
+    - value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    - require_in:
+      - cron: elasticsearch_curator_cron
+
 {%- if server.curator.logfile|default("") %}
 elasticsearch_curator_log:
   file.managed:
