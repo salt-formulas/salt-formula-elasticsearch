@@ -9,7 +9,7 @@ elasticsearch_curator_config:
   - name: /etc/elasticsearch/curator.yml
   - source: salt://elasticsearch/files/curator.yml
   - group: elasticsearch
-  - mode: 750
+  - mode: 640
   - template: jinja
   - require:
     - pkg: elasticsearch_packages
@@ -19,7 +19,7 @@ elasticsearch_curator_action_config:
   - name: /etc/elasticsearch/curator_actions.yml
   - source: salt://elasticsearch/files/curator_actions.yml
   - group: elasticsearch
-  - mode: 750
+  - mode: 640
   - template: jinja
   - require:
     - file: elasticsearch_curator_config
@@ -30,3 +30,11 @@ elasticsearch_curator_cron:
     - user: elasticsearch
     - minute: random
     - hour: 1
+
+{%- if server.curator.logfile|default("") %}
+elasticsearch_curator_log:
+  file.managed:
+  - name: {{ server.curator.logfile }}
+  - user: elasticsearch
+  - group: elasticsearch
+{%- endif %}
