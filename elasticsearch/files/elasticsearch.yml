@@ -172,6 +172,13 @@ index.number_of_replicas: {{ server.get('index', {}).get('replicas', 1) }}
 # Path to where plugins are installed:
 #
 # path.plugins: /path/to/plugins
+#
+{%- if server.snapshot is defined %}
+path.repo:
+  {%- for repo_name, repo in server.snapshot.iteritems() %}
+  - {{ repo.path }}
+  {%- endfor %}
+{%- endif %}
 
 
 #################################### Plugin ###################################
