@@ -95,6 +95,10 @@ node.rack: {{ server.rack }}
 # to disable it, set the following:
 # node.max_local_storage_nodes: 1
 
+{%- if server.get('threadpool', {}).get('bulk', {}).get('queue_size') is defined %}
+# For bulk operations. Thread pool type is fixed with a size of # of available processors.
+threadpool.bulk.queue_size: {{ server.threadpool.bulk.queue_size }}
+{%- endif %}
 
 #################################### Index ####################################
 
@@ -196,6 +200,9 @@ path.repo:
 # Set this property to true to lock the memory:
 #
 # bootstrap.mlockall: true
+{%- if server.mlockall is defined %}
+bootstrap.mlockall: {{ server.mlockall|lower }}
+{%- endif %}
 
 # Make sure that the ES_MIN_MEM and ES_MAX_MEM environment variables are set
 # to the same value, and that the machine has enough memory to allocate
