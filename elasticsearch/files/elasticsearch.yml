@@ -95,7 +95,7 @@ node.rack: {{ server.rack }}
 # to disable it, set the following:
 # node.max_local_storage_nodes: 1
 
-{%- if server.get('threadpool', {}).get('bulk', {}).get('queue_size') is defined %}
+{%- if server.get('threadpool', {}).get('bulk', {}).queue_size is defined %}
 # For bulk operations. Thread pool type is fixed with a size of # of available processors.
 threadpool.bulk.queue_size: {{ server.threadpool.bulk.queue_size }}
 {%- endif %}
