@@ -212,22 +212,21 @@ bootstrap.mlockall: {{ server.mlockall|lower }}
 # communication. (the range means that if the port is busy, it will automatically
 # try the next port).
 
-# Set the bind address specifically (IPv4 or IPv6):
+# Set both 'bind_host' and 'publish_host':
 #
-#
-network.bind_host: {{ server.bind.address }}
-http.port: {{ server.bind.port }}
-http.enabled: true
-# Set the address other nodes will use to communicate with this node. If not
-# set, it is automatically derived. It must point to an actual IP address.
-#
+# network.host: 192.168.0.1
+
+{%- if server.get('bind', {}).address is defined %}
+network.host: {{ server.bind.address }}
+{%- endif %}
+
+# Set specifically the address other nodes will use to communicate with this
+# node. If not set, it is automatically derived. It must point to an actual
+# IP address.
 {%- if server.publish_host is defined %}
 network.publish_host: {{ server.publish_host }}
 {%- endif %}
 
-# Set both 'bind_host' and 'publish_host':
-#
-# network.host: 192.168.0.1
 
 # Set a custom port for the node to node communication (9300 by default):
 #
@@ -240,6 +239,9 @@ network.publish_host: {{ server.publish_host }}
 # Set a custom port to listen for HTTP traffic:
 #
 # http.port: 9200
+{%- if server.get('bind', {}).port is defined %}
+http.port: {{ server.bind.port }}
+{%- endif %}
 
 # Set a custom allowed content length:
 #
@@ -248,6 +250,7 @@ network.publish_host: {{ server.publish_host }}
 # Disable HTTP completely:
 #
 # http.enabled: false
+http.enabled: true
 
 
 ################################### Gateway ###################################
