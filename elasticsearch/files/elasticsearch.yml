@@ -158,6 +158,9 @@ index.number_of_replicas: {{ server.get('index', {}).get('replicas', 1) }}
 # Path to directory where to store index data allocated for this node.
 #
 # path.data: /path/to/data
+{%- if server.get('path', {}).data is defined %}
+path.data = {{ server.path.data }}
+{%- endif %}
 #
 # Can optionally include more than one location, causing data to be striped across
 # the locations (a la RAID 0) on a file level, favouring locations with most free
@@ -172,6 +175,9 @@ index.number_of_replicas: {{ server.get('index', {}).get('replicas', 1) }}
 # Path to log files:
 #
 # path.logs: /path/to/logs
+{%- if server.get('path', {}).logs is defined %}
+path.logs = {{ server.path.logs }}
+{%- endif %}
 
 # Path to where plugins are installed:
 #
