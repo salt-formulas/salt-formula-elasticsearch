@@ -274,17 +274,26 @@ http.enabled: true
 # Allow recovery process after N nodes in a cluster are up:
 #
 # gateway.recover_after_nodes: 1
+{%- if server.get('gateway', {}).recover_after_nodes is defined %}
+gateway.recover_after_nodes: {{ server.gateway.recover_after_nodes }}
+{%- endif %}
 
 # Set the timeout to initiate the recovery process, once the N nodes
 # from previous setting are up (accepts time value):
 #
 # gateway.recover_after_time: 5m
+{%- if server.get('gateway', {}).recover_after_time is defined %}
+gateway.recover_after_time: {{ server.gateway.recover_after_time }}
+{%- endif %}
 
 # Set how many nodes are expected in this cluster. Once these N nodes
 # are up (and recover_after_nodes is met), begin recovery process immediately
 # (without waiting for recover_after_time to expire):
 #
 # gateway.expected_nodes: 2
+{%- if server.get('gateway', {}).expected_nodes is defined %}
+gateway.expected_nodes: {{ server.gateway.expected_nodes }}
+{%- endif %}
 
 
 ############################# Recovery Throttling #############################
