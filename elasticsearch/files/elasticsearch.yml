@@ -253,6 +253,16 @@ http.port: {{ server.bind.port }}
 #
 # http.max_content_length: 100mb
 
+# Enable or disable cross-origin resource sharing
+{%- if server.get('cors', {}).enabled is defined %}
+http.cors.enabled: {{ server.cors.enabled|lower }}
+{%- endif %}
+
+# Which origins to allow.
+{%- if server.get('cors', {}).allow_origin is defined %}
+http.cors.allow-origin: {{ server.cors.allow_origin }}
+{%- endif %}
+
 # Disable HTTP completely:
 #
 # http.enabled: false
