@@ -95,6 +95,10 @@ node.rack: {{ server.rack }}
 # to disable it, set the following:
 # node.max_local_storage_nodes: 1
 
+{%- if server.get('threadpool', {}).get('bulk', {}).queue_size is defined %}
+# For bulk operations. Thread pool type is fixed with a size of # of available processors.
+threadpool.bulk.queue_size: {{ server.threadpool.bulk.queue_size }}
+{%- endif %}
 
 #################################### Index ####################################
 
@@ -154,6 +158,9 @@ index.number_of_replicas: {{ server.get('index', {}).get('replicas', 1) }}
 # Path to directory where to store index data allocated for this node.
 #
 # path.data: /path/to/data
+{%- if server.get('path', {}).data is defined %}
+path.data = {{ server.path.data }}
+{%- endif %}
 #
 # Can optionally include more than one location, causing data to be striped across
 # the locations (a la RAID 0) on a file level, favouring locations with most free
@@ -168,6 +175,9 @@ index.number_of_replicas: {{ server.get('index', {}).get('replicas', 1) }}
 # Path to log files:
 #
 # path.logs: /path/to/logs
+{%- if server.get('path', {}).logs is defined %}
+path.logs = {{ server.path.logs }}
+{%- endif %}
 
 # Path to where plugins are installed:
 #
@@ -189,6 +199,9 @@ index.number_of_replicas: {{ server.get('index', {}).get('replicas', 1) }}
 # Set this property to true to lock the memory:
 #
 # bootstrap.mlockall: true
+{%- if server.mlockall is defined %}
+bootstrap.mlockall: {{ server.mlockall|lower }}
+{%- endif %}
 
 # Make sure that the ES_MIN_MEM and ES_MAX_MEM environment variables are set
 # to the same value, and that the machine has enough memory to allocate
@@ -205,22 +218,21 @@ index.number_of_replicas: {{ server.get('index', {}).get('replicas', 1) }}
 # communication. (the range means that if the port is busy, it will automatically
 # try the next port).
 
-# Set the bind address specifically (IPv4 or IPv6):
+# Set both 'bind_host' and 'publish_host':
 #
-#
-network.bind_host: {{ server.bind.address }}
-http.port: {{ server.bind.port }}
-http.enabled: true
-# Set the address other nodes will use to communicate with this node. If not
-# set, it is automatically derived. It must point to an actual IP address.
-#
+# network.host: 192.168.0.1
+
+{%- if server.get('bind', {}).address is defined %}
+network.host: {{ server.bind.address }}
+{%- endif %}
+
+# Set specifically the address other nodes will use to communicate with this
+# node. If not set, it is automatically derived. It must point to an actual
+# IP address.
 {%- if server.publish_host is defined %}
 network.publish_host: {{ server.publish_host }}
 {%- endif %}
 
-# Set both 'bind_host' and 'publish_host':
-#
-# network.host: 192.168.0.1
 
 # Set a custom port for the node to node communication (9300 by default):
 #
@@ -233,14 +245,28 @@ network.publish_host: {{ server.publish_host }}
 # Set a custom port to listen for HTTP traffic:
 #
 # http.port: 9200
+{%- if server.get('bind', {}).port is defined %}
+http.port: {{ server.bind.port }}
+{%- endif %}
 
 # Set a custom allowed content length:
 #
 # http.max_content_length: 100mb
 
+# Enable or disable cross-origin resource sharing
+{%- if server.get('cors', {}).enabled is defined %}
+http.cors.enabled: {{ server.cors.enabled|lower }}
+{%- endif %}
+
+# Which origins to allow.
+{%- if server.get('cors', {}).allow_origin is defined %}
+http.cors.allow-origin: {{ server.cors.allow_origin }}
+{%- endif %}
+
 # Disable HTTP completely:
 #
 # http.enabled: false
+http.enabled: true
 
 
 ################################### Gateway ###################################
@@ -264,17 +290,26 @@ network.publish_host: {{ server.publish_host }}
 # Allow recovery process after N nodes in a cluster are up:
 #
 # gateway.recover_after_nodes: 1
+{%- if server.get('gateway', {}).recover_after_nodes is defined %}
+gateway.recover_after_nodes: {{ server.gateway.recover_after_nodes }}
+{%- endif %}
 
 # Set the timeout to initiate the recovery process, once the N nodes
 # from previous setting are up (accepts time value):
 #
 # gateway.recover_after_time: 5m
+{%- if server.get('gateway', {}).recover_after_time is defined %}
+gateway.recover_after_time: {{ server.gateway.recover_after_time }}
+{%- endif %}
 
 # Set how many nodes are expected in this cluster. Once these N nodes
 # are up (and recover_after_nodes is met), begin recovery process immediately
 # (without waiting for recover_after_time to expire):
 #
 # gateway.expected_nodes: 2
+{%- if server.get('gateway', {}).expected_nodes is defined %}
+gateway.expected_nodes: {{ server.gateway.expected_nodes }}
+{%- endif %}
 
 
 ############################# Recovery Throttling #############################
