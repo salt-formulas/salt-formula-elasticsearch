@@ -1,6 +1,7 @@
 {%- if pillar.elasticsearch.server is defined %}
 {%- from "elasticsearch/map.jinja" import server with context %}
 
+{%- if server.get('enabled', False) %}
 local_plugin:
   elasticsearch_cluster:
     plugin: python
@@ -11,4 +12,5 @@ local_plugin:
     process:
       elasticsearch:
         match: 'java.*elasticsearch'
+{%- endif %}
 {%- endif %}
