@@ -1,0 +1,3 @@
+dashboard:
+  elasticsearch:
+    template: elasticsearch/files/Elasticsearch.json
