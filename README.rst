@@ -119,6 +119,20 @@ Common definition for curator:
                   unit: days
                   unit_count: 2
 
+Client setup
+------------
+
+Client with host and port
+
+.. code-block:: yaml
+
+    elasticsearch:
+      client:
+        enabled: true
+        server:
+          host: elasticsearch.host
+          port: 9200
+
 Read more
 =========
 
