@@ -1,0 +1,6 @@
+applications:
+- elasticsearch.client
+parameters:
+  elasticsearch:
+    client:
+      enabled: true
