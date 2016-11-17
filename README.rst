@@ -122,7 +122,7 @@ Common definition for curator:
 Client setup
 ------------
 
-Client with host and port
+Client with host and port:
 
 .. code-block:: yaml
 
@@ -132,6 +132,22 @@ Client with host and port
         server:
           host: elasticsearch.host
           port: 9200
+
+Client where you download an index template that is stored in the direcotry
+*files/*:
+
+.. code-block:: yaml
+
+    elasticsearch:
+      client:
+        enabled: true
+        server:
+          host: elasticsearch.host
+          port: 9200
+        index:
+          my_index:
+            enabled: true
+            template: elasticsearch/files/my_index_template.json
 
 Read more
 =========
