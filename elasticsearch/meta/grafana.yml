@@ -1,3 +1,4 @@
 dashboard:
   elasticsearch:
+    format: json
     template: elasticsearch/files/grafana_influxdb.json
