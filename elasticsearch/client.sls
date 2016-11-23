@@ -8,6 +8,10 @@
   - user: root
   - group: root
 
+elasticsearch_client_packages:
+  pkg.installed:
+  - names: {{ client.pkgs }}
+
 {%- for index_name, index in client.get('index', {}).iteritems() %}
 elasticsearch_index_{{ index_name }}:
   {%- if index.get('enabled', False) %}
@@ -19,6 +23,8 @@ elasticsearch_index_{{ index_name }}:
   elasticsearch_index_template.absent:
   - name: {{ index_name }}
   {%- endif %}
+  - require:
+    - pkg: elasticsearch_client_packages
 {%- endfor %}
 
 {%- endif %}
