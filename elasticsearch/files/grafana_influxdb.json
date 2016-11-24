@@ -90,19 +90,12 @@
               "dsType": "influxdb",
               "fill": "",
               "function": "last",
-              "groupBy": [
-                {
-                  "params": [
-                    "auto"
-                  ],
-                  "type": "time"
-                }
-              ],
+              "groupBy": [],
               "groupby_field": "",
               "interval": "",
               "measurement": "cluster_status",
               "policy": "default",
-              "query": "SELECT last(\"value\") FROM \"cluster_status\" WHERE \"cluster_name\" = 'elasticsearch' AND $timeFilter GROUP BY time($interval)",
+              "query": "SELECT last(\"value\") FROM \"cluster_status\" WHERE \"cluster_name\" = 'elasticsearch' AND $timeFilter",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -123,10 +116,11 @@
               "tags": [
                 {
                   "key": "environment_label",
-                  "operator": "=",
-                  "value": "$environment"
+                  "operator": "=~",
+                  "value": "/^$environment$/"
                 },
                 {
+                  "condition": "AND",
                   "key": "cluster_name",
                   "operator": "=",
                   "value": "elasticsearch"
@@ -232,17 +226,10 @@
             {
               "alias": "number",
               "dsType": "influxdb",
-              "groupBy": [
-                {
-                  "params": [
-                    "auto"
-                  ],
-                  "type": "time"
-                }
-              ],
+              "groupBy": [],
               "measurement": "elasticsearch_cluster_number_of_nodes",
               "policy": "default",
-              "query": "SELECT last(\"value\") FROM \"elasticsearch_cluster_number_of_nodes\" WHERE $timeFilter GROUP BY time($interval)",
+              "query": "SELECT last(\"value\") FROM \"elasticsearch_cluster_number_of_nodes\" WHERE $timeFilter",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -263,8 +250,8 @@
               "tags": [
                 {
                   "key": "environment_label",
-                  "operator": "=",
-                  "value": "$environment"
+                  "operator": "=~",
+                  "value": "/^$environment$/"
                 }
               ]
             }
@@ -726,17 +713,10 @@
               "column": "value",
               "dsType": "influxdb",
               "function": "last",
-              "groupBy": [
-                {
-                  "params": [
-                    "auto"
-                  ],
-                  "type": "time"
-                }
-              ],
+              "groupBy": [],
               "measurement": "lma_components_threads",
               "policy": "default",
-              "query": "SELECT last(\"value\") FROM \"lma_components_threads\" WHERE \"service\" = 'elasticsearch' AND \"hostname\" =~ /^$server$/ AND $timeFilter GROUP BY time($interval)",
+              "query": "SELECT last(\"value\") FROM \"lma_components_threads\" WHERE \"service\" = 'elasticsearch' AND \"hostname\" =~ /^$server$/ AND $timeFilter",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -763,8 +743,8 @@
                 {
                   "condition": "AND",
                   "key": "hostname",
-                  "operator": "=",
-                  "value": "$server"
+                  "operator": "=~",
+                  "value": "/^$server$/"
                 }
               ]
             }
@@ -1333,5 +1313,5 @@
   },
   "timezone": "browser",
   "title": "Elasticsearch",
-  "version": 3
+  "version": 4
 }
