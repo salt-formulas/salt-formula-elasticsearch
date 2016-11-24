@@ -27,12 +27,34 @@ elasticsearch_config:
   - require:
     - pkg: elasticsearch_packages
 
+elasticsearch_logging:
+  file.managed:
+  - name: /etc/elasticsearch/logging.yml
+  - source: salt://elasticsearch/files/logging.yml
+  - template: jinja
+  - require:
+    - pkg: elasticsearch_packages
+
+{%- if server.get('log', {}).logrotate|default(True) and not
+       salt['file.file_exists' ]('/etc/logrotate.d/elasticsearch') %}
+{#
+  Create logrotate config only if it doesn't already exist to avoid conflict
+  with logrotate formula or possibly package-shipped config
+#}
+elasticsearch_logrotate:
+  file.managed:
+  - name: /etc/logrotate.d/elasticsearch
+  - source: salt://elasticsearch/files/logrotate.conf
+  - template: jinja
+{%- endif %}
+
 elasticsearch_service:
   service.running:
   - enable: true
   - name: {{ server.service }}
   - watch:
     - file: elasticsearch_config
+    - file: elasticsearch_logging
     - file: elasticsearch_default
 
 {%- endif %}

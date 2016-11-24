@@ -24,6 +24,17 @@ Single-node elasticsearch with clustering disabled:
           shards: 1
           replicas: 0
 
+Setup shared repository for snapshots:
+
+.. code-block:: bash
+
+    elasticsearch:
+      server:
+        snapshot:
+          reponame:
+            path: /var/lib/glusterfs/repo
+            compress: true
+
 Cluster with manually defined members:
 
 .. code-block:: yaml

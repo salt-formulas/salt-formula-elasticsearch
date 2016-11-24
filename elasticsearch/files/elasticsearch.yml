@@ -182,6 +182,13 @@ path.logs = {{ server.path.logs }}
 # Path to where plugins are installed:
 #
 # path.plugins: /path/to/plugins
+#
+{%- if server.snapshot is defined %}
+path.repo:
+  {%- for repo_name, repo in server.snapshot.iteritems() %}
+  - {{ repo.path }}
+  {%- endfor %}
+{%- endif %}
 
 
 #################################### Plugin ###################################
