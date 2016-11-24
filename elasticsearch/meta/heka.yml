@@ -55,6 +55,7 @@ aggregator:
       - elasticsearch_check
       dimension:
         service: elasticsearch-cluster
+        nagios_host: 01-service-clusters
     elasticsearch_cluster:
       policy: highest_severity
       alerting: enabled
@@ -64,6 +65,7 @@ aggregator:
       - elasticsearch_health
       dimension:
         service: elasticsearch-cluster
+        nagios_host: 01-service-clusters
     elasticsearch:
       policy: highest_severity
       alerting: enabled_with_notification
@@ -74,4 +76,5 @@ aggregator:
       - elasticsearch_cluster
       dimension:
         cluster_name: elasticsearch
+        nagios_host: 00-top-clusters
 {%- endif %}
