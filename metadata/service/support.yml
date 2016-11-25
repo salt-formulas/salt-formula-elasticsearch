@@ -2,10 +2,12 @@ parameters:
   elasticsearch:
     _support:
       collectd:
-        enabled: false
+        enabled: true
       heka:
         enabled: true
       sensu:
         enabled: true
       sphinx:
+        enabled: true
+      grafana:
         enabled: true

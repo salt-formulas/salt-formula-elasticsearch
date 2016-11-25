@@ -130,6 +130,36 @@ Common definition for curator:
                   unit: days
                   unit_count: 2
 
+Client setup
+------------
+
+Client with host and port:
+
+.. code-block:: yaml
+
+    elasticsearch:
+      client:
+        enabled: true
+        server:
+          host: elasticsearch.host
+          port: 9200
+
+Client where you download an index template that is stored in the direcotry
+*files/*:
+
+.. code-block:: yaml
+
+    elasticsearch:
+      client:
+        enabled: true
+        server:
+          host: elasticsearch.host
+          port: 9200
+        index:
+          my_index:
+            enabled: true
+            template: elasticsearch/files/my_index_template.json
+
 Read more
 =========
 

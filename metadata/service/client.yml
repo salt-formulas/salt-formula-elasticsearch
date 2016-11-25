@@ -1,0 +1,16 @@
+applications:
+- elasticsearch.client
+parameters:
+  elasticsearch:
+    client:
+      enabled: true
+      index:
+        log:
+          enabled: true
+          template: elasticsearch/files/es_template_log.json
+        notification:
+          enabled: true
+          template: elasticsearch/files/es_template_notification.json
+        kibana4:
+          enabled: true
+          template: elasticsearch/files/es_template_kibana4.json

@@ -1,0 +1,16 @@
+{%- if pillar.elasticsearch.server is defined %}
+{%- from "elasticsearch/map.jinja" import server with context %}
+
+{%- if server.get('enabled', False) %}
+local_plugin:
+  elasticsearch_cluster:
+    plugin: python
+    template: elasticsearch/files/collectd_elasticsearch_cluster.conf
+    address: {{ server.get('bind', {}).get('address', '127.0.0.1') }}
+    port: {{ server.get('bind', {}).get('port', 9200) }}
+  collectd_processes:
+    process:
+      elasticsearch:
+        match: 'java.*elasticsearch'
+{%- endif %}
+{%- endif %}

@@ -1,0 +1,80 @@
+{%- if pillar.elasticsearch.server is defined %}
+metric_collector:
+  trigger:
+    elasticsearch_check:
+      description: 'Elasticsearch cannot be checked'
+      severity: down
+      rules:
+      - metric: elasticsearch_check
+        relational_operator: '=='
+        threshold: 0
+        window: 60
+        periods: 0
+        function: last
+    elasticsearch_health_critical:
+      description: 'Elasticsearch cluster health is critical'
+      severity: critical
+      rules:
+      - metric: elasticsearch_cluster_health
+        relational_operator: '=='
+        threshold: 3 # red
+        window: 60
+        function: min
+    elasticsearch_health_warning:
+      description: 'Elasticsearch cluster health is warning'
+      severity: warning
+      rules:
+      - metric: elasticsearch_cluster_health
+        relational_operator: '=='
+        threshold: 2 # yellow
+        window: 60
+        function: min
+  alarm:
+    elasticsearch_check:
+      alerting: enabled
+      triggers:
+      - elasticsearch_check
+      dimension:
+        service: elasticsearch
+    elasticsearch_health:
+      alerting: enabled
+      triggers:
+      - elasticsearch_health_critical
+      - elasticsearch_health_warning
+      dimension:
+        cluster: elasticsearch
+aggregator:
+  alarm_cluster:
+    elasticsearch_service:
+      policy: majority_of_members
+      alerting: enabled
+      group_by: hostname
+      match:
+        service: elasticsearch
+      members:
+      - elasticsearch_check
+      dimension:
+        service: elasticsearch-cluster
+        nagios_host: 01-service-clusters
+    elasticsearch_cluster:
+      policy: highest_severity
+      alerting: enabled
+      match:
+        cluster: elasticsearch
+      members:
+      - elasticsearch_health
+      dimension:
+        service: elasticsearch-cluster
+        nagios_host: 01-service-clusters
+    elasticsearch:
+      policy: highest_severity
+      alerting: enabled_with_notification
+      match:
+        service: elasticsearch-cluster
+      members:
+      - elasticsearch_service
+      - elasticsearch_cluster
+      dimension:
+        cluster_name: elasticsearch
+        nagios_host: 00-top-clusters
+{%- endif %}
