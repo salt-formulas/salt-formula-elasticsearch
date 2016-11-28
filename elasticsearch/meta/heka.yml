@@ -11,6 +11,25 @@ metric_collector:
         window: 60
         periods: 0
         function: last
+  alarm:
+    elasticsearch_check:
+      alerting: enabled
+      triggers:
+      - elasticsearch_check
+      dimension:
+        service: elasticsearch-node
+remote_collector:
+  trigger:
+    elasticsearch_cluster_check:
+      description: 'Elasticsearch cluster cannot be checked'
+      severity: down
+      rules:
+      - metric: elasticsearch_cluster_check
+        relational_operator: '=='
+        threshold: 0
+        window: 60
+        periods: 0
+        function: last
     elasticsearch_health_critical:
       description: 'Elasticsearch cluster health is critical'
       severity: critical
@@ -30,19 +49,14 @@ metric_collector:
         window: 60
         function: min
   alarm:
-    elasticsearch_check:
+    elasticsearch_cluster_health:
       alerting: enabled
       triggers:
-      - elasticsearch_check
-      dimension:
-        service: elasticsearch
-    elasticsearch_health:
-      alerting: enabled
-      triggers:
+      - elasticsearch_cluster_check
       - elasticsearch_health_critical
       - elasticsearch_health_warning
       dimension:
-        cluster: elasticsearch
+        service: elasticsearch-cluster
 aggregator:
   alarm_cluster:
     elasticsearch_service:
@@ -50,27 +64,27 @@ aggregator:
       alerting: enabled
       group_by: hostname
       match:
-        service: elasticsearch
+        service: elasticsearch-node
       members:
       - elasticsearch_check
       dimension:
-        service: elasticsearch-cluster
+        service: elasticsearch
         nagios_host: 01-service-clusters
     elasticsearch_cluster:
       policy: highest_severity
       alerting: enabled
       match:
-        cluster: elasticsearch
-      members:
-      - elasticsearch_health
-      dimension:
         service: elasticsearch-cluster
+      members:
+      - elasticsearch_cluster_health
+      dimension:
+        service: elasticsearch
         nagios_host: 01-service-clusters
     elasticsearch:
       policy: highest_severity
       alerting: enabled_with_notification
       match:
-        service: elasticsearch-cluster
+        service: elasticsearch
       members:
       - elasticsearch_service
       - elasticsearch_cluster

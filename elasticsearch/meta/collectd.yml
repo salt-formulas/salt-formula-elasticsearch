@@ -1,16 +1,25 @@
-{%- if pillar.elasticsearch.server is defined %}
+{%- if pillar.elasticsearch.server is defined or pillar.elasticsearch.client is defined %}
 {%- from "elasticsearch/map.jinja" import server with context %}
+{%- from "elasticsearch/map.jinja" import client with context %}
 
 {%- if server.get('enabled', False) %}
 local_plugin:
-  elasticsearch_cluster:
+  elasticsearch_node:
     plugin: python
-    template: elasticsearch/files/collectd_elasticsearch_cluster.conf
-    address: {{ server.get('bind', {}).get('address', '127.0.0.1') }}
+    template: elasticsearch/files/collectd_elasticsearch_node.conf
+    address: {{ server.get('bind', {}).get('address', '127.0.0.1')|replace('0.0.0.0', '127.0.0.1') }}
     port: {{ server.get('bind', {}).get('port', 9200) }}
   collectd_processes:
     process:
       elasticsearch:
         match: 'java.*elasticsearch'
+{%- endif %}
+{%- if client.get('enabled', False) %}
+remote_plugin:
+  elasticsearch_cluster:
+    plugin: python
+    template: elasticsearch/files/collectd_elasticsearch_cluster.conf
+    address: {{ client.server.host }}
+    port: {{ client.server.get('port', 9200) }}
 {%- endif %}
 {%- endif %}
