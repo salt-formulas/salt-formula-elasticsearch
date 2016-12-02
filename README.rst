@@ -68,6 +68,7 @@ Common definition for curator:
           timeout: 900
           logfile: /var/log/elasticsearch/curator.log
           logformat: json
+          master_only: true
           actions:
             - action: delete_indices
               description: >-
