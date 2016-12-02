@@ -17,7 +17,7 @@ client:
   ssl_no_validate: False
   http_auth:
   timeout: {{ server.curator.timeout|default(120) }}
-  master_only: False
+  master_only: {{ server.curator.get('master_only', False)|lower }}
 
 logging:
   loglevel: {{ server.curator.loglevel|default("INFO") }}
