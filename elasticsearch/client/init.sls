@@ -1,16 +1,8 @@
 {%- from "elasticsearch/map.jinja" import client with context %}
 {%- if client.get('enabled', False) %}
 
-/etc/salt/minion.d/_elasticsearch.conf:
-  file.managed:
-  - source: salt://elasticsearch/files/_elasticsearch.conf
-  - template: jinja
-  - user: root
-  - group: root
-
-elasticsearch_client_packages:
-  pkg.installed:
-  - names: {{ client.pkgs }}
+include:
+  - elasticsearch.client.service
 
 {%- for index_name, index in client.get('index', {}).iteritems() %}
 elasticsearch_index_{{ index_name }}:
