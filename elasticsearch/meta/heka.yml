@@ -60,7 +60,7 @@ remote_collector:
 aggregator:
   alarm_cluster:
     elasticsearch_service:
-      policy: majority_of_members
+      policy: availability_of_members
       alerting: enabled
       group_by: hostname
       match:
