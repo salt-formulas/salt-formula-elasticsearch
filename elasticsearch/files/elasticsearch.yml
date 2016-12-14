@@ -41,7 +41,9 @@ cluster.name: {{ server.cluster.name }}
 # from configuring them manually. You can tie this node to a specific name:
 #
 # node.name: "Franz Kafka"
-node.name: {{ server.get('name', '${HOSTNAME}') }}
+{%- if server.name is defined %}
+node.name: {{ server.name }}
+{% endif %}
 
 # Every node can be configured to allow or deny being eligible as the master,
 # and to allow or deny to store the data.
