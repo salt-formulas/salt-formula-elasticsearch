@@ -430,3 +430,7 @@ discovery.zen.ping.unicast.hosts: [{% for member in server.cluster.members %}"{{
 #monitor.jvm.gc.old.warn: 10s
 #monitor.jvm.gc.old.info: 5s
 #monitor.jvm.gc.old.debug: 2s
+
+{%- if server.script is mapping %}
+script: {{ server.script|yaml }}
+{%- endif %}
