@@ -1268,7 +1268,7 @@
         "includeAll": false,
         "name": "server",
         "options": [],
-        "query": "show tag values from elasticsearch_cluster_health with key = \"hostname\" where environment_label =~ /^$environment$/",
+        "query": "show tag values from elasticsearch_check with key = \"hostname\" where environment_label =~ /^$environment$/",
         "refresh": 1,
         "refresh_on_load": true,
         "regex": "",
