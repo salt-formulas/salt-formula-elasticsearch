@@ -8,6 +8,9 @@ parameters:
         log:
           enabled: true
           template: elasticsearch/files/es_template_log.json
+        audit:
+          enabled: true
+          template: elasticsearch/files/es_template_audit.json
         notification:
           enabled: true
           template: elasticsearch/files/es_template_notification.json

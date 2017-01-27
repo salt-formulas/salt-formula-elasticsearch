@@ -1,0 +1,56 @@
+{
+    "mappings": {
+        "message": {
+            "properties": {
+                "Payload": {
+                    "type": "string"
+                },
+                "Logger": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "Hostname": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "Pid": {
+                    "index": "not_analyzed",
+                    "type": "long"
+                },
+                "Severity": {
+                    "index": "not_analyzed",
+                    "type": "long"
+                },
+                "Type": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "severity_label": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "environment_label": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "action": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "event_type": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "outcome": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "notification_type": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "template": "audit-*"
+}
