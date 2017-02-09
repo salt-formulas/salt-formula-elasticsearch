@@ -62,8 +62,8 @@
                     "format": "dateOptionalTime"
                 },
                 "publisher": {
-                    "type": "not_analyzed",
-                    "format": "string"
+                    "index": "not_analyzed",
+                    "type": "string"
                 }
             }
         }
