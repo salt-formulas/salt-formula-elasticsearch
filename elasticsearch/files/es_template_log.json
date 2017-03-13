@@ -38,7 +38,7 @@
                     "index": "not_analyzed",
                     "type": "string"
                 },
-                "openstack_region": {
+                "region": {
                     "index": "not_analyzed",
                     "type": "string"
                 },
