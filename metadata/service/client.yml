@@ -1,5 +1,5 @@
 applications:
-- elasticsearch.client
+- elasticsearch
 parameters:
   elasticsearch:
     client:
