@@ -1,0 +1,50 @@
+---
+driver:
+  name: docker
+  hostname: elasticsearch.ci.local
+  use_sudo: false
+
+provisioner:
+  name: salt_solo
+  salt_install: bootstrap
+  salt_bootstrap_url: https://bootstrap.saltstack.com
+  salt_version: latest
+  require_chef: false
+  log_level: error
+  formula: elasticsearch
+  grains:
+    noservices: True
+  state_top:
+    base:
+      "*":
+        - linux
+        - elasticsearch
+  pillars:
+    top.sls:
+      base:
+        "*":
+          - elasticsearch
+          - elasticsearch_debian_repo
+  pillars-from-files:
+    elasticsearch_debian_repo.sls: tests/pillar/repo_elasticsearch.sls
+  dependencies:
+    - name: linux
+      repo: git
+      source: https://github.com/salt-formulas/salt-formula-linux.git
+
+verifier:
+  name: inspec
+  sudo: true
+
+platforms:
+  - name: ubuntu-xenial
+    driver_config:
+      image: trevorj/salty-whales:xenial
+      platform: ubuntu
+
+suites:
+  - name: <%=ENV['SUITE'] || 'single'%>
+    provisioner:
+      pillars-from-files:
+        elasticsearch.sls: tests/pillar/<%=ENV['SUITE'] || 'single'%>.sls
+# vim: ft=yaml sw=2 ts=2 sts=2 tw=125

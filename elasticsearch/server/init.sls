@@ -1,11 +1,10 @@
 {%- from "elasticsearch/map.jinja" import server with context %}
 {%- if server.enabled %}
 
+{%- if server.curator is defined %}
 include:
-  - java
-  {%- if server.curator is defined %}
   - elasticsearch.server.curator
-  {%- endif %}
+{%- endif %}
 
 elasticsearch_packages:
   pkg.installed:
@@ -48,6 +47,8 @@ elasticsearch_logrotate:
   - template: jinja
 {%- endif %}
 
+{%- if not grains.get('noservices','false')%}
+
 elasticsearch_service:
   service.running:
   - enable: true
@@ -56,5 +57,7 @@ elasticsearch_service:
     - file: elasticsearch_config
     - file: elasticsearch_logging
     - file: elasticsearch_default
+
+{%- endif %}
 
 {%- endif %}
