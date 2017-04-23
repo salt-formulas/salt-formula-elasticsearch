@@ -18,10 +18,6 @@
 # Elasticsearch PID directory
 #PID_DIR=/var/run/elasticsearch
 
-# Heap size defaults to 256m min, 1g max
-# Set ES_HEAP_SIZE to 50% of available RAM, but no more than 31g
-ES_HEAP_SIZE={{ server.get('heap', {}).get('size', grains.get('mem_total', 1024)/2/1024)|round(0, 'ceil')|int }}g
-
 # Heap new generation
 #ES_HEAP_NEWSIZE=
 
@@ -29,7 +25,8 @@ ES_HEAP_SIZE={{ server.get('heap', {}).get('size', grains.get('mem_total', 1024)
 #ES_DIRECT_SIZE=
 
 # Additional Java OPTS
-#ES_JAVA_OPTS=
+{%- set size = server.get('heap', {}).get('size', grains.get('mem_total', 1024)/2/1024)|round(0, 'ceil')|int %}
+ES_JAVA_OPTS=-Xms{{ size }}g -Xmx{{ size }}g
 
 # Configure restart on package upgrade (true, every other setting will lead to not restarting)
 #ES_RESTART_ON_UPGRADE=true
