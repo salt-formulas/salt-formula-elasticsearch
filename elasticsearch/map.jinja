@@ -1,11 +1,10 @@
-
-
 {%- load_yaml as base_defaults %}
 Debian:
   pkgs:
   - elasticsearch
   curator_pkgs:
   - python-elasticsearch-curator
+  - cron
   service: elasticsearch
   version: '1.4.4'
 RedHat:
