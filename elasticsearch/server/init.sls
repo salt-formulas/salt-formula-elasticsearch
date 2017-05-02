@@ -47,7 +47,7 @@ elasticsearch_logrotate:
   - template: jinja
 {%- endif %}
 
-{%- if not grains.get('noservices','false')%}
+{%- if not grains.get('noservices', False) %}
 
 elasticsearch_service:
   service.running:
