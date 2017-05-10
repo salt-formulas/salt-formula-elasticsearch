@@ -1,0 +1,7 @@
+minion:
+  {%- if pillar.elasticsearch.client is defined %}
+  elasticsearch:
+    {%- from "elasticsearch/map.jinja" import client with context %}
+    elasticsearch:
+      host: {{client.server.host}}:{{client.server.port}}
+  {%- endif %}
