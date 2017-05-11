@@ -1,5 +1,5 @@
 minion:
-  {%- if pillar.elasticsearch.client is defined %}
+  {%- if pillar.get('elasticsearch', {}).get('client') %}
   elasticsearch:
     {%- from "elasticsearch/map.jinja" import client with context %}
     elasticsearch:
