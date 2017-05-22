@@ -3,6 +3,8 @@ parameters:
     _support:
       collectd:
         enabled: true
+      telegraf:
+        enabled: true
       heka:
         enabled: true
       sensu:
