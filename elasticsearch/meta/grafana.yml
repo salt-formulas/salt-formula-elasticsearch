@@ -1,4 +1,9 @@
 dashboard:
   elasticsearch:
+    datasource: influxdb
     format: json
     template: elasticsearch/files/grafana_dashboards/elasticsearch_influxdb.json
+  elasticsearch_prometheus:
+    datasource: prometheus
+    format: json
+    template: elasticsearch/files/grafana_dashboards/elasticsearch_prometheus.json
