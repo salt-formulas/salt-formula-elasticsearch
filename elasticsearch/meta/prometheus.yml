@@ -1,0 +1,49 @@
+{%- if pillar.elasticsearch.server is defined %}
+{% raw %}
+server:
+  alert:
+    ElasticsearchClusterHealthStatusYellow:
+      if: >-
+        min_over_time(elasticsearch_cluster_health_status[5m]) == 2
+      labels:
+        severity: warning
+        service: elasticsearch
+      annotations:
+        summary: Elasticsearch cluster status is YELLOW
+        description: >-
+          The Elasticsearch cluster status is YELLOW for the last 5 minutes.
+    ElasticsearchClusterHealthStatusRed:
+      if: >-
+        min_over_time(elasticsearch_cluster_health_status[5m]) == 3
+      labels:
+        severity: critical
+        service: elasticsearch
+      annotations:
+        summary: 'Elasticsearch cluster status is RED'
+        description: >-
+          The Elasticsearch cluster status is RED for the last 5 minutes.
+    ElasticsearchClusterDiskLowWaterMark:
+      if: >-
+          (max(elasticsearch_fs_total_total_in_bytes) by (host, instance) - max(elasticsearch_fs_total_available_in_bytes) by (host, instance)) / max(elasticsearch_fs_total_total_in_bytes)  by (host, instance) * 100.0 >= 85
+      for: 5m
+      labels:
+        severity: warning
+        service: elasticsearch
+      annotations:
+        summary: 'Elasticsearch low disk watermark [85%] exceeded on node {{ $labels.host}} instance {{ $labels.instance }}'
+        description: >-
+          Elasticsearch will not allocate new shards to node {{ $labels.host }}
+
+    ElasticsearchClusterDiskHighWaterMark:
+      if: >-
+          (max(elasticsearch_fs_total_total_in_bytes) by (host, instance) - max(elasticsearch_fs_total_available_in_bytes) by (host, instance)) / max(elasticsearch_fs_total_total_in_bytes) by (host, instance) * 100.0 >= 90
+      for: 5m
+      annotations:
+        summary: 'Elasticsearch high disk watermark [90%] exceeded on node {{ $labels.host}} instance {{ $labels.instance }}'
+        description: >-
+          Elasticsearch will not allocate new shards to node {{ $labels.host }} and will attempt to relocate shards to another node
+      labels:
+        severity: critical
+        service: elasticsearch
+{% endraw %}
+{%- endif %}
