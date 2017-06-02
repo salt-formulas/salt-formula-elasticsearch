@@ -115,11 +115,15 @@ threadpool.bulk.queue_size: {{ server.threadpool.bulk.queue_size }}
 
 # Set the number of shards (splits) of an index (5 by default):
 #
+{%- if server.version <= "5.0.0" %}
 index.number_of_shards: {{ server.get('index', {}).get('shards', 5) }}
+{%- endif %}
 
 # Set the number of replicas (additional copies) of an index (1 by default):
 #
+{%- if server.version <= "5.0.0" %}
 index.number_of_replicas: {{ server.get('index', {}).get('replicas', 1) }}
+{%- endif %}
 
 # Note, that for development on a local machine, with small indices, it usually
 # makes sense to "disable" the distributed features:
@@ -354,7 +358,9 @@ gateway.expected_nodes: {{ server.gateway.expected_nodes }}
 # operational within the cluster. Its recommended to set it to a higher value
 # than 1 when running more than 2 nodes in the cluster.
 #
+{%- if server.version <= "5.0.0" %}
 discovery.zen.minimum_master_nodes: {{ server.get('cluster', {}).minimum_master_nodes|default(1) }}
+{%- endif %}
 
 # Set the time to wait for ping responses from other nodes when discovering.
 # Set this option to a higher value on a slow or congested network
@@ -371,7 +377,9 @@ discovery.zen.minimum_master_nodes: {{ server.get('cluster', {}).minimum_master_
 #
 # 1. Disable multicast discovery (enabled by default):
 #
+{%- if server.version <= "5.0.0" %}
 discovery.zen.ping.multicast.enabled: {{ server.get('cluster', {}).get('multicast', True)|lower }}
+{%- endif %}
 #
 # 2. Configure an initial list of master nodes in the cluster
 #    to perform discovery when new nodes (master or data) are started:

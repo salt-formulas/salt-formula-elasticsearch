@@ -8,8 +8,9 @@ include:
 
 elasticsearch_packages:
   pkg.installed:
-  - names: {{ server.pkgs }}
+  - pkgs: {{ server.pkgs }}
 
+{%- if server.version <= "5.0.0" %}
 elasticsearch_default:
   file.managed:
   - name: /etc/default/elasticsearch
@@ -17,6 +18,15 @@ elasticsearch_default:
   - template: jinja
   - require:
     - pkg: elasticsearch_packages
+{%- elif server.version >= "5.0.0" %}
+elasticsearch_default:
+  file.managed:
+  - name: /etc/default/elasticsearch
+  - source: salt://elasticsearch/files/elasticsearch-5
+  - template: jinja
+  - require:
+    - pkg: elasticsearch_packages
+{%- endif %}
 
 elasticsearch_config:
   file.managed:
@@ -26,6 +36,25 @@ elasticsearch_config:
   - require:
     - pkg: elasticsearch_packages
 
+{%- if server.version >= "5.0.0" %}
+elasticsearch_jvm_conf:
+  file.managed:
+  - name: /etc/elasticsearch/jvm.options
+  - source: salt://elasticsearch/files/jvm.options
+  - template: jinja
+  - require:
+    - pkg: elasticsearch_packages
+{%- endif %}
+
+{%- if server.version >= "5.0.0" %}
+elasticsearch_logging:
+  file.managed:
+  - name: /etc/elasticsearch/log4j2.properties
+  - source: salt://elasticsearch/files/log4j2.properties
+  - template: jinja
+  - require:
+    - pkg: elasticsearch_packages
+{%- else %}
 elasticsearch_logging:
   file.managed:
   - name: /etc/elasticsearch/logging.yml
@@ -33,6 +62,7 @@ elasticsearch_logging:
   - template: jinja
   - require:
     - pkg: elasticsearch_packages
+{%- endif %}
 
 {%- if server.get('log', {}).logrotate|default(True) and not
        salt['file.file_exists' ]('/etc/logrotate.d/elasticsearch') %}
