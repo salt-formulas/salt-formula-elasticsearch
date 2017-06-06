@@ -145,7 +145,7 @@ Client with host and port:
           host: elasticsearch.host
           port: 9200
 
-Client where you download an index template that is stored in the direcotry
+Client where you download an index template that is stored in the directory
 *files/*:
 
 .. code-block:: yaml
@@ -160,6 +160,37 @@ Client where you download an index template that is stored in the direcotry
           my_index:
             enabled: true
             template: elasticsearch/files/my_index_template.json
+
+Client where you download an index template from the metadata definition and force index creation:
+
+.. code-block:: yaml
+
+    elasticsearch:
+      client:
+        enabled: true
+        server:
+          host: elasticsearch.host
+          port: 9200
+        index:
+          my_index:
+            enabled: true
+            force_operation: true
+            definition:
+              template: notifications
+              settings:
+                number_of_shards: 5
+                number_of_replicas: 1
+              mappings:
+                notification:
+                  properties:
+                    applicationId:
+                      type: long
+                    content:
+                      type: text
+                      fields:
+                        keyword:
+                          type: keyword
+                          ignore_above: 256
 
 Read more
 =========
