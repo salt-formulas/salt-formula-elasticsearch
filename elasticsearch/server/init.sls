@@ -47,17 +47,16 @@ elasticsearch_logrotate:
   - template: jinja
 {%- endif %}
 
-{%- if not grains.get('noservices', False) %}
-
 elasticsearch_service:
   service.running:
   - enable: true
   - name: {{ server.service }}
+  {%- if grains.get('noservices') %}
+  - onlyif: /bin/false
+  {%- endif %}
   - watch:
     - file: elasticsearch_config
     - file: elasticsearch_logging
     - file: elasticsearch_default
-
-{%- endif %}
 
 {%- endif %}
