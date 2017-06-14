@@ -688,7 +688,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "max(elasticsearch_clusterstats_indices_docs_count)",
+              "expr": "max(elasticsearch_indices_docs_count{host=\"$host\"})",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
@@ -739,7 +739,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum  without(status)(irate (elasticsearch_clusterstats_indices_docs_count{host=\"$host\"}[1m]) ) ",
+              "expr": "sum  without(status)(irate (elasticsearch_indices_docs_count{host=\"$host\"}[1m]) ) ",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1907,5 +1907,5 @@
   },
   "timezone": "browser",
   "title": "Elasticsearch",
-  "version": 23
+  "version": 24
 }
