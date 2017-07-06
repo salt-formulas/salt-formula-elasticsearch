@@ -6,11 +6,13 @@ set -e
 CURDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 METADATA=${CURDIR}/../metadata.yml
 FORMULA_NAME=$(cat $METADATA | python -c "import sys,yaml; print yaml.load(sys.stdin)['name']")
+FORMULA_META_DIR=${CURDIR}/../${FORMULA_NAME}/meta
 
 ## Overrideable parameters
 PILLARDIR=${PILLARDIR:-${CURDIR}/pillar}
 BUILDDIR=${BUILDDIR:-${CURDIR}/build}
 VENV_DIR=${VENV_DIR:-${BUILDDIR}/virtualenv}
+MOCK_BIN_DIR=${MOCK_BIN_DIR:-${CURDIR}/mock_bin}
 DEPSDIR=${BUILDDIR}/deps
 
 SALT_FILE_DIR=${SALT_FILE_DIR:-${BUILDDIR}/file_root}
@@ -38,6 +40,15 @@ setup_virtualenv() {
     virtualenv $VENV_DIR
     source ${VENV_DIR}/bin/activate
     pip install salt${PIP_SALT_VERSION}
+}
+
+setup_mock_bin() {
+    # If some state requires a binary, a lightweight replacement for
+    # such binary can be put into MOCK_BIN_DIR for test purposes
+    if [ -d "${MOCK_BIN_DIR}" ]; then
+        PATH="${MOCK_BIN_DIR}:$PATH"
+        export PATH
+    fi
 }
 
 setup_pillar() {
@@ -121,6 +132,7 @@ prepare() {
     [ -d ${BUILDDIR} ] && mkdir -p ${BUILDDIR}
 
     which salt-call || setup_virtualenv
+    setup_mock_bin
     setup_pillar
     setup_salt
     install_dependencies
@@ -130,7 +142,26 @@ run() {
     for pillar in ${PILLARDIR}/*.sls; do
         grep ${FORMULA_NAME}: ${pillar} &>/dev/null || continue
         state_name=$(basename ${pillar%.sls})
+        salt_run grains.set 'noservices' False force=True
+
+        echo "Checking state ${FORMULA_NAME}.${state_name} ..."
         salt_run --id=${state_name} state.show_sls ${FORMULA_NAME} || (log_err "Execution of ${FORMULA_NAME}.${state_name} failed"; exit 1)
+
+        # Check that all files in 'meta' folder can be rendered using any valid pillar
+        for meta in `find ${FORMULA_META_DIR} -type f`; do
+            meta_name=$(basename ${meta})
+            echo "Checking meta ${meta_name} ..."
+            salt_run --out=quiet --id=${state_name} cp.get_template ${meta} ${SALT_CACHE_DIR}/${meta_name} \
+              || (log_err "Failed to render meta ${meta} using pillar ${FORMULA_NAME}.${state_name}"; exit 1)
+            cat ${SALT_CACHE_DIR}/${meta_name}
+        done
+    done
+}
+
+real_run() {
+    for pillar in ${PILLARDIR}/*.sls; do
+        state_name=$(basename ${pillar%.sls})
+        salt_run --id=${state_name} state.sls ${FORMULA_NAME} || (log_err "Execution of ${FORMULA_NAME}.${state_name} failed"; exit 1)
     done
 }
 
@@ -158,6 +189,9 @@ case $1 in
         ;;
     run)
         run
+        ;;
+    real-run)
+        real_run
         ;;
     *)
         prepare
