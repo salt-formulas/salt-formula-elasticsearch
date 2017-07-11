@@ -2,9 +2,18 @@
 {% raw %}
 server:
   alert:
+    ElasticsearchDown:
+      if: >-
+        elasticsearch_up != 1
+      labels:
+        severity: warning
+        service: elasticsearch
+      annotations:
+        summary: 'Elasticsearch service down'
+        description: 'Elasticsearch service is down on node {{ $labels.host }}'
     ElasticsearchClusterHealthStatusYellow:
       if: >-
-        min_over_time(elasticsearch_cluster_health_status[5m]) == 2
+        max_over_time(elasticsearch_cluster_health_status[5m]) == 2
       labels:
         severity: warning
         service: elasticsearch
@@ -14,7 +23,7 @@ server:
           The Elasticsearch cluster status is YELLOW for the last 5 minutes.
     ElasticsearchClusterHealthStatusRed:
       if: >-
-        min_over_time(elasticsearch_cluster_health_status[5m]) == 3
+        max_over_time(elasticsearch_cluster_health_status[5m]) == 3
       labels:
         severity: critical
         service: elasticsearch
