@@ -1,19 +1,13 @@
-{%- if pillar.elasticsearch.server is defined %}
-{% raw %}
+{%- if pillar.elasticsearch.server is defined or pillar.elasticsearch.client is defined %}
+{%- from "elasticsearch/map.jinja" import server, client with context %}
+
 server:
   alert:
-    ElasticsearchDown:
-      if: >-
-        elasticsearch_up != 1
-      labels:
-        severity: warning
-        service: elasticsearch
-      annotations:
-        summary: 'Elasticsearch service down'
-        description: 'Elasticsearch service is down on node {{ $labels.host }}'
+{%- if client.get('enabled', False) %}
+{%- raw %}
     ElasticsearchClusterHealthStatusYellow:
       if: >-
-        max_over_time(elasticsearch_cluster_health_status[5m]) == 2
+        elasticsearch_cluster_health_status == 2
       labels:
         severity: warning
         service: elasticsearch
@@ -23,7 +17,7 @@ server:
           The Elasticsearch cluster status is YELLOW for the last 5 minutes.
     ElasticsearchClusterHealthStatusRed:
       if: >-
-        max_over_time(elasticsearch_cluster_health_status[5m]) == 3
+        elasticsearch_cluster_health_status == 3
       labels:
         severity: critical
         service: elasticsearch
@@ -31,6 +25,19 @@ server:
         summary: 'Elasticsearch cluster status is RED'
         description: >-
           The Elasticsearch cluster status is RED for the last 5 minutes.
+{%- endraw %}
+{%- endif %}
+{%- if server.get('enabled', False) %}
+{%- raw %}
+    ElasticsearchDown:
+      if: >-
+        elasticsearch_up{host=~'.*'} != 1
+      labels:
+        severity: warning
+        service: elasticsearch
+      annotations:
+        summary: 'Elasticsearch service down'
+        description: 'Elasticsearch service is down on node {{ $labels.host }}'
     ElasticsearchClusterDiskLowWaterMark:
       if: >-
           (max(elasticsearch_fs_total_total_in_bytes) by (host, instance) - max(elasticsearch_fs_total_available_in_bytes) by (host, instance)) / max(elasticsearch_fs_total_total_in_bytes)  by (host, instance) * 100.0 >= 85
@@ -54,5 +61,6 @@ server:
       labels:
         severity: critical
         service: elasticsearch
-{% endraw %}
+{%- endraw %}
+{%- endif %}
 {%- endif %}

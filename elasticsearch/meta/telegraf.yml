@@ -1,13 +1,31 @@
-{%- from "elasticsearch/map.jinja" import server with context %}
+{%- if pillar.elasticsearch.server is defined or pillar.elasticsearch.client is defined %}
+{%- from "elasticsearch/map.jinja" import server, client with context %}
+
 {%- if server.get('enabled', False) %}
-{%- set address = server.get('bind', {}).get('address', '127.0.0.1') %}
-{%- set port = server.get('bind', {}).get('port', 9200) %}
-{%- set servers = ['http://{}:{}'.format(address, port)] %}
+{%- set bind = server.get('bind', {}) %}
+{# The local agent gathers the node's metrics + cluster stats if the node is master #}
 agent:
   input:
     elasticsearch:
-      servers: {{ servers|yaml }}
-      local: true
-      cluster_health: true
+      template: elasticsearch/files/telegraf.conf
+      servers:
+      - "http://{{ bind.address|default('127.0.0.1') }}:{{ bind.port|default(9200) }}"
+      cluster_health: false
       cluster_stats: true
+      local: true
+{%- endif %}
+
+{%- if client.get('enabled', False) %}
+{# The remote agent gathers only the cluster health metrics #}
+remote_agent:
+  input:
+    elasticsearch:
+      template: elasticsearch/files/telegraf.conf
+      servers:
+      - "http://{{ client.server.host }}:{{ client.server.get('port', 9200) }}"
+      cluster_health: true
+      cluster_stats: false
+      local: false
+      namepass: [ 'elasticsearch_cluster_health*' ]
+{%- endif %}
 {%- endif %}
