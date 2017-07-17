@@ -37,14 +37,30 @@ verifier:
   sudo: true
 
 platforms:
-  - name: ubuntu-xenial
+  - name: <%=ENV['PLATFORM'] || 'ubuntu-xenial'%>
     driver_config:
-      image: trevorj/salty-whales:xenial
+      image: <%=ENV['PLATFORM'] || 'trevorj/salty-whales:xenial'%>
       platform: ubuntu
 
 suites:
-  - name: <%=ENV['SUITE'] || 'single'%>
+  - name: single
     provisioner:
       pillars-from-files:
-        elasticsearch.sls: tests/pillar/<%=ENV['SUITE'] || 'single'%>.sls
+        elasticsearch.sls: tests/pillar/single.sls
+
+  - name: cluster
+    provisioner:
+      pillars-from-files:
+        elasticsearch.sls: tests/pillar/cluster.sls
+
+  - name: curator
+    provisioner:
+      pillars-from-files:
+        elasticsearch.sls: tests/pillar/curator.sls
+
+  - name: client
+    provisioner:
+      pillars-from-files:
+        elasticsearch.sls: tests/pillar/client.sls
+
 # vim: ft=yaml sw=2 ts=2 sts=2 tw=125
