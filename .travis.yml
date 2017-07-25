@@ -17,17 +17,17 @@ install:
   - bundle install
 
 env:
-    - SUITE='single'
-    - SUITE='cluster'
-    - SUITE='curator'
-    - SUITE='client'
+    - PLATFORM=trevorj/salty-whales:xenial SUITE=single
+    - PLATFORM=trevorj/salty-whales:xenial SUITE=cluster
+    - PLATFORM=trevorj/salty-whales:xenial SUITE=curator
+    - PLATFORM=trevorj/salty-whales:xenial SUITE=client
 
 before_script:
   - set -o pipefail
   - make test | tail
 
 script:
-  - test ! -e .kitchen.yml || bundle exec kitchen test -t tests/integration
+  - KITCHEN_LOCAL_YAML=.kitchen.travis.yml bundle exec kitchen test -t tests/integration
 
 notifications:
   webhooks:
