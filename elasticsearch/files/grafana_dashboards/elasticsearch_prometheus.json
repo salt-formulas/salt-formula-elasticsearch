@@ -1867,7 +1867,7 @@
         "refresh": 1,
         "refresh_on_load": true,
         "regex": ".*,host=\"(.+?\\d+)\".*",
-        "sort": 0,
+        "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
