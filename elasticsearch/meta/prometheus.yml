@@ -1,5 +1,5 @@
 {%- if pillar.elasticsearch.server is defined or pillar.elasticsearch.client is defined %}
-{%- from "elasticsearch/map.jinja" import server, client with context %}
+{%- from "elasticsearch/map.jinja" import server, client, monitoring with context %}
 
 server:
   alert:
@@ -29,15 +29,42 @@ server:
 {%- endif %}
 {%- if server.get('enabled', False) %}
 {%- raw %}
-    ElasticsearchDown:
+    ElasticsearchInfo:
       if: >-
-        elasticsearch_up{host=~'.*'} != 1
+        elasticsearch_up{host=~'.*'} == 0
+      labels:
+        severity: info
+        service: elasticsearch
+      annotations:
+        summary: 'Elasticsearch service is down'
+        description: 'Elasticsearch service is down on node {{ $labels.host }}'
+    ElasticsearchWarning:
+      if: >-
+        count(elasticsearch_up{host=~'.*'} == 0) >= count(elasticsearch_up{host=~'.*'}) * {% endraw %} {{ monitoring.service_failed_warning_threshold_percent }} {% raw %}
       labels:
         severity: warning
         service: elasticsearch
       annotations:
-        summary: 'Elasticsearch service down'
-        description: 'Elasticsearch service is down on node {{ $labels.host }}'
+        summary: 'More than {%- endraw %} {{monitoring.service_failed_warning_threshold_percent*100}}%{%- raw %} of Elasticsearch services are down'
+        description: 'More than {%- endraw %} {{monitoring.service_failed_warning_threshold_percent*100}}%{%- raw %} of Elasticsearch services are down'
+    ElasticsearchCritical:
+      if: >-
+        count(elasticsearch_up{host=~'.*'} == 0) >= count(elasticsearch_up{host=~'.*'}) * {% endraw %} {{ monitoring.service_failed_critical_threshold_percent }} {% raw %}
+      labels:
+        severity: critical
+        service: elasticsearch
+      annotations:
+        summary: 'More than {%- endraw %} {{monitoring.service_failed_critical_threshold_percent*100}}%{%- raw %} of Elasticsearch services are down'
+        description: 'More than {%- endraw %} {{monitoring.service_failed_critical_threshold_percent*100}}%{%- raw %} of Elasticsearch services are down'
+    ElasticsearchDown:
+      if: >-
+        count(elasticsearch_up{host=~'.*'} == 0) == count(elasticsearch_up{host=~'.*'})
+      labels:
+        severity: down
+        service: elasticsearch
+      annotations:
+        summary: 'All Elasticsearch services are down'
+        description: 'All Elasticsearch services are down'
     ElasticsearchClusterDiskLowWaterMark:
       if: >-
           (max(elasticsearch_fs_total_total_in_bytes) by (host, instance) - max(elasticsearch_fs_total_available_in_bytes) by (host, instance)) / max(elasticsearch_fs_total_total_in_bytes)  by (host, instance) * 100.0 >= 85
@@ -49,7 +76,6 @@ server:
         summary: 'Elasticsearch low disk watermark [85%] exceeded on node {{ $labels.host}} instance {{ $labels.instance }}'
         description: >-
           Elasticsearch will not allocate new shards to node {{ $labels.host }}
-
     ElasticsearchClusterDiskHighWaterMark:
       if: >-
           (max(elasticsearch_fs_total_total_in_bytes) by (host, instance) - max(elasticsearch_fs_total_available_in_bytes) by (host, instance)) / max(elasticsearch_fs_total_total_in_bytes) by (host, instance) * 100.0 >= 90
