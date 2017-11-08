@@ -4,6 +4,7 @@ elasticsearch:
     bind:
       address: 0.0.0.0
       port: 9200
+    version: 2
     curator:
       timeout: 900
       logfile: /var/log/elasticsearch/curator.log

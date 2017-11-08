@@ -1,0 +1,125 @@
+{%- from "elasticsearch/map.jinja" import server with context %}
+{
+    "settings" : {
+        "number_of_shards" : {{ server.get('index', {}).get('shards', 5) }},
+        "number_of_replicas" : {{ server.get('index', {}).get('replicas', 1) }}
+    },
+    "mappings": {
+        "message": {
+            "properties": {
+                "Payload": {
+                    "type": "text"
+                },
+                "Logger": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "Hostname": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "Pid": {
+                    "index": "not_analyzed",
+                    "type": "long"
+                },
+                "Severity": {
+                    "index": "not_analyzed",
+                    "type": "long"
+                },
+                "Type": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "severity_label": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "environment_label": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "region": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "action": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "event_type": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "outcome": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "notification_type": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                }
+            }
+        }
+    },
+    "template": "audit-*"
+}

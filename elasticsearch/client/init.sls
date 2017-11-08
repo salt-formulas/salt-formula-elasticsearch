@@ -39,9 +39,10 @@ elasticsearch_index_{{ index_name }}:
 
 {%- if index.get('force_operation', False) %}
 elasticsearch_index_{{ index_name }}_{{ operation }}:
+  {% set curdate = None | strftime('%Y.%m.%d') %}
   module.run:
     - name: elasticsearch.index_{{ operation }}
-    - index: {{ index_name }}
+    - index: {{ index_name }}-{{ curdate }}
 {%- endif %}
 
 {%- endfor %}

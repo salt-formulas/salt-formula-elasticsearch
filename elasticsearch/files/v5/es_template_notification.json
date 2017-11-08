@@ -1,0 +1,163 @@
+{%- from "elasticsearch/map.jinja" import server with context %}
+{
+    "settings" : {
+        "number_of_shards" : {{ server.get('index', {}).get('shards', 5) }},
+        "number_of_replicas" : {{ server.get('index', {}).get('replicas', 1) }}
+    },
+    "mappings": {
+        "message": {
+            "properties": {
+                "event_type": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "Payload": {
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "Logger": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "Hostname": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "hostname": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "Pid": {
+                    "index": "not_analyzed",
+                    "type": "long"
+                },
+                "Severity": {
+                    "index": "not_analyzed",
+                    "type": "long"
+                },
+                "Timestamp": {
+                    "type": "date",
+                    "format": "dateOptionalTime"
+                },
+                "Type": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "severity_label": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "environment_label": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "region": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "request_id": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "tenant_id": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "user_id": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                },
+                "launched_at": {
+                    "type": "date",
+                    "format": "dateOptionalTime"
+                },
+                "created_at": {
+                    "type": "date",
+                    "format": "dateOptionalTime"
+                },
+                "publisher": {
+                    "index": "not_analyzed",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                }
+            }
+        }
+    },
+    "template": "notification-*"
+}

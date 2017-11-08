@@ -3,9 +3,12 @@ applications:
 classes:
 - service.elasticsearch.support
 parameters:
+  _param:
+    elasticsearch_version: 2
   elasticsearch:
     server:
       enabled: true
+      version: ${_param:elasticsearch_version}
       bind:
         address: 127.0.0.1
         port: 9200

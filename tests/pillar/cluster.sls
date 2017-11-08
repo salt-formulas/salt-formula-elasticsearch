@@ -16,3 +16,4 @@ elasticsearch:
     index:
       shards: 5
       replicas: 1
+    version: 2
