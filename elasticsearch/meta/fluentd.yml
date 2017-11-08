@@ -1,0 +1,45 @@
+config:
+  label:
+    elasticsearch:
+      input:
+        tail_elasticsearch:
+          type: tail
+          tag: elasticsearch.general
+          path: /var/log/elasticsearch/elasticsearch.log
+          pos_file: /tmp/elasticsearch.general.pos
+          format: '/^\[(?<time>[^ ]* [^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] \[([^\]]*) *\] (?<Payload>.+)/'
+        tail_elasticsearch_deprecation:
+          type: tail
+          tag: elasticsearch.deprecation
+          path: /var/log/elasticsearch/elasticsearch_deprecation.log
+          pos_file: /tmp/elasticsearch.deprecation.pos
+          format: '/^\[(?<time>[^ ]* [^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] (?<Payload>.+)/'
+        tail_elasticsearch_index_indexing_slowlog:
+          type: tail
+          tag: elasticsearch.slowlog.indexing
+          path: /var/log/elasticsearch/elasticsearch_index_indexing_slowlog.log
+          pos_file: /tmp/elasticsearch.slowlog.indexing.pos
+          format: '/^\[(?<time>[^ ]* [^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] (?<Payload>.+)/'
+        tail_elasticsearch_index_search_slowlog:
+          type: tail
+          tag: elasticsearch.slowlog.search
+          path: /var/log/elasticsearch/elasticsearch_index_search_slowlog.log
+          pos_file: /tmp/elasticsearch.slowlog.search.pos
+          format: '/^\[(?<time>[^ ]* [^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] (?<Payload>.+)/'
+      filter:
+        match_severity:
+          type: record_transformer
+          tag: elasticsearch.**
+          enable_ruby: true
+          record:
+            - name: programname
+              value: elasticsearch
+            - name: Severity
+              value: ${ {"WARN"=>4,"INFO"=>6,"DEBUG"=>7,"TRACE"=>7}[record["severity_label"]] }
+            - name: severity_label
+              value: ${ {"WARN"=>"WARNING","INFO"=>"INFO","DEBUG"=>"DEBUG","TRACE"=>"TRACE"}[record["severity_label"]] }
+      match:
+        push_to_default:
+          tag: elasticsearch.**
+          type: relabel
+          label: default_output
