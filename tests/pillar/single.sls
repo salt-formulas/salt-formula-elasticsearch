@@ -9,3 +9,4 @@ elasticsearch:
     index:
       shards: 1
       replicas: 0
+    version: 2

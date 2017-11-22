@@ -15,9 +15,11 @@ RedHat:
   - python-elasticsearch-curator
   service: elasticsearch
   version: '1.4.4'
+default:
+  version: 2
 {%- endload %}
 
-{%- set server = salt['grains.filter_by'](base_defaults, merge=salt['pillar.get']('elasticsearch:server')) %}
+{%- set server = salt['grains.filter_by'](base_defaults, merge=salt['pillar.get']('elasticsearch:server'), base='default') %}
 
 {%- load_yaml as client_defaults %}
 Debian:

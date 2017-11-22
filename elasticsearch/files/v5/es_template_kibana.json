@@ -1,0 +1,295 @@
+{%- from "elasticsearch/map.jinja" import server with context %}
+{
+    "settings" : {
+        "number_of_shards" : {{ server.get('index', {}).get('shards', 5) }},
+        "number_of_replicas" : {{ server.get('index', {}).get('replicas', 1) }}
+    },
+    "mappings" : {
+      "index-pattern" : {
+        "properties" : {
+          "fieldFormatMap" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "fields" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "intervalName" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "notExpandable" : {
+            "type" : "boolean"
+          },
+          "timeFieldName" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "title" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          }
+        }
+      },
+      "config" : {
+        "properties" : {
+          "buildNum" : {
+            "index" : "not_analyzed",
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          }
+        }
+      },
+      "search" : {
+        "properties" : {
+          "columns" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "description" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "hits" : {
+            "type" : "integer"
+          },
+          "kibanaSavedObjectMeta" : {
+            "properties" : {
+              "searchSourceJSON" : {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "sort" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "title" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "version" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "visualization" : {
+        "properties" : {
+          "description" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "kibanaSavedObjectMeta" : {
+            "properties" : {
+              "searchSourceJSON" : {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "savedSearchId" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "title" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "uiStateJSON" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "version" : {
+            "type" : "integer"
+          },
+          "visState" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          }
+        }
+      },
+      "dashboard" : {
+        "properties" : {
+          "description" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "hits" : {
+            "type" : "integer"
+          },
+          "kibanaSavedObjectMeta" : {
+            "properties" : {
+              "searchSourceJSON" : {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "optionsJSON" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "panelsJSON" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "timeFrom" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }}
+          },
+          "timeRestore" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "timeTo" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "title" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "uiStateJSON" : {
+            "type": "text",
+            "fields": {
+              "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+              }
+            }
+          },
+          "version" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "template": ".kibana"
+}
+
