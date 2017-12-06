@@ -2,7 +2,7 @@ applications:
 - elasticsearch
 parameters:
   _param:
-    elasticsearch_version: 2
+    elasticsearch_version: 5
   elasticsearch:
     client:
       enabled: true
