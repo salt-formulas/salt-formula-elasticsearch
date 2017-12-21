@@ -4,7 +4,7 @@ classes:
 - service.elasticsearch.support
 parameters:
   _param:
-    elasticsearch_version: 2
+    elasticsearch_version: 5
   elasticsearch:
     server:
       enabled: true
