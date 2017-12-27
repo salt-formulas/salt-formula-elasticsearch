@@ -43,6 +43,11 @@ elasticsearch_index_{{ index_name }}_{{ operation }}:
   module.run:
     - name: elasticsearch.index_{{ operation }}
     - index: {{ index_name }}-{{ curdate }}
+{%- else %}
+elasticsearch_index_{{ index_name }}_{{ operation }}:
+  module.run:
+    - name: elasticsearch.index_{{ operation }}
+    - index: {{ index_name }}
 {%- endif %}
 
 {%- endfor %}
