@@ -10,6 +10,6 @@ Vcs-Git: https://github.com/tcpcloud/salt-formula-elasticsearch.git
 
 Package: salt-formula-elasticsearch
 Architecture: all
-Depends: ${misc:Depends}, salt-master, reclass
+Depends: ${misc:Depends}
 Description: ElasticSearch Salt formula
  Install and configure ElasticSearch server and client.
