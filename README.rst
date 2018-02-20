@@ -192,6 +192,15 @@ Client where you download an index template from the metadata definition and for
                           type: keyword
                           ignore_above: 256
 
+Upgrade operations
+------------------
+
+Default elasticsearch client state can only create index temlates. To update exisiting ones according to pillar dedicated state should be run explicitly:
+
+.. code-block:: bash
+
+    salt -C 'I@elasticsearch:client' state.sls elasticsearch.client.update_index_templates
+
 Read more
 =========
 
