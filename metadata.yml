@@ -1,3 +1,3 @@
 name: "elasticsearch"
 version: "0.2"
-source: "https://github.com/tcpcloud/salt-formula-elasticsearch"
+source: "https://github.com/salt-formulas/salt-formula-elasticsearch"
