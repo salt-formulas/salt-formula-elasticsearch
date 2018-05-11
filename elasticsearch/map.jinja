@@ -44,5 +44,7 @@ RedHat:
     'default': {
         'service_failed_warning_threshold_percent': 0.3,
         'service_failed_critical_threshold_percent': 0.6,
+        'service_disk_space_watermark_minor_threshold_percent': 0.6,
+        'service_disk_space_watermark_major_threshold_percent': 0.75,
     },
 }, grain='os_family', merge=salt['pillar.get']('elasticsearch:monitoring')) %}
