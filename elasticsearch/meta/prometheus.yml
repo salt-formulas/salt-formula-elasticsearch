@@ -14,7 +14,7 @@ server:
         service: elasticsearch
       annotations:
         summary: "Elasticsearch cluster status is YELLOW"
-        description: "The Elasticsearch cluster status is YELLOW for at least 2 minutes."
+        description: "The Elasticsearch cluster status is YELLOW for 2 minutes."
   {%- endraw %}
     ElasticsearchClusterHealthStatusCritical:
       if: >-
@@ -26,7 +26,7 @@ server:
         service: elasticsearch
       annotations:
         summary: "Elasticsearch cluster status is RED"
-        description: "The Elasticsearch cluster status is RED for at least 2 minutes."
+        description: "The Elasticsearch cluster status is RED for 2 minutes."
   {%- endraw %}
 {%- endif %}
 {%- if server.get('enabled', False) %}
@@ -51,7 +51,7 @@ server:
         service: elasticsearch
       annotations:
         summary: "{%- endraw %}{{monitoring.service_failed_warning_threshold_percent*100}}%{%- raw %} of Elasticsearch services are down"
-        description: "{{ $value }} Elasticsearch services are down for at least 2 minutes."
+        description: "{{ $value }} Elasticsearch services are down for 2 minutes."
   {%- endraw %}
     ElasticsearchServiceDownMajor:
       if: >-
@@ -63,7 +63,7 @@ server:
         service: elasticsearch
       annotations:
         summary: "{%- endraw %}{{monitoring.service_failed_critical_threshold_percent*100}}%{%- raw %} of Elasticsearch services are down"
-        description: "{{ $value }} Elasticsearch services are down for at least 2 minutes."
+        description: "{{ $value }} Elasticsearch services are down for 2 minutes."
   {%- endraw %}
     ElasticsearchServiceOutage:
       if: >-
@@ -86,7 +86,7 @@ server:
         service: elasticsearch
       annotations:
         summary: "Elasticsearch uses {%- endraw %}{{monitoring.service_failed_warning_threshold_percent*100}}%{%- raw %} of disk space"
-        description: "Elasticsearch uses {{ $value }}% of disk space on the '{{ $labels.instance }}' instance on the {{ $labels.host }} node for at least 5 minutes."
+        description: "The Elasticsearch '{{ $labels.instance }}' instance uses {{ $value }}% of disk space on the {{ $labels.host }} node for 5 minutes."
   {%- endraw %}
     ElasticsearchDiskWaterMarkMajor:
       if: >-
@@ -98,7 +98,7 @@ server:
         service: elasticsearch
       annotations:
         summary: "Elasticsearch uses {%- endraw %}{{monitoring.service_failed_critical_threshold_percent*100}}%{%- raw %} of disk space"
-        description: "Elasticsearch uses {{ $value }}% of disk space on the '{{ $labels.instance }}' instance on the {{ $labels.host }} node for at least 5 minutes."
+        description: "The Elasticsearch '{{ $labels.instance }}' instance uses {{ $value }}% of disk space on the {{ $labels.host }} node for 5 minutes."
   {%- endraw %}
 {%- endif %}
 {%- endif %}
