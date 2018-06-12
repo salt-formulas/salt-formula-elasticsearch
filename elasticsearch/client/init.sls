@@ -4,6 +4,14 @@
 include:
   - elasticsearch.client.service
 
+{%- if grains['saltversioninfo'][0] < 2017 or
+      (grains['saltversioninfo'][0] == 2017 and grains['saltversioninfo'][1] < 7) %}
+  {# Since Salt 2017.7 new elasticsearch state is used and elasticsearch_index_... deprecated #}
+  {% set force_compatibility = True %}
+{%- else %}
+  {% set force_compatibility = False %}
+{%- endif %}
+
 {%- for index_name, index in client.get('index', {}).iteritems() %}
 elasticsearch_index_{{ index_name }}:
 
@@ -19,7 +27,11 @@ elasticsearch_index_{{ index_name }}:
   {%- endif %}
 
   {%- if definition is defined %}
+  {%- if force_compatibility %}
   elasticsearch_index_template.present:
+  {%- else %}
+  elasticsearch.index_template_present:
+  {%- endif %}
   - name: {{ index_name }}
   - definition: '{{ definition|json }}'
   {%- else %}
@@ -30,7 +42,11 @@ elasticsearch_index_{{ index_name }}:
   {%- else %}
 
   {% set operation = 'delete' %}
+  {%- if force_compatibility %}
   elasticsearch_index_template.absent:
+  {%- else %}
+  elasticsearch.index_template_absent:
+  {%- endif %}
   - name: {{ index_name }}
   {%- endif %}
 
