@@ -3,9 +3,9 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:88",
+        "$$hashKey": "object:9967",
         "builtIn": 1,
-        "datasource": "default",
+        "datasource": "prometheus",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -17,8 +17,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 383,
-  "iteration": 1528981954531,
+  "id": null,
+  "iteration": 1529573287627,
   "links": [],
   "panels": [
     {
@@ -64,10 +64,12 @@
       "mappingType": 1,
       "mappingTypes": [
         {
+          "$$hashKey": "object:10155",
           "name": "value to text",
           "value": 1
         },
         {
+          "$$hashKey": "object:10156",
           "name": "range to text",
           "value": 2
         }
@@ -95,6 +97,7 @@
       "tableColumn": "",
       "targets": [
         {
+          "$$hashKey": "object:10131",
           "expr": "max(elasticsearch_cluster_health_status) by (name)",
           "format": "time_series",
           "intervalFactor": 2,
@@ -109,28 +112,33 @@
       "valueFontSize": "80%",
       "valueMaps": [
         {
+          "$$hashKey": "object:10158",
           "op": "=",
           "text": "N/A",
           "value": "null"
         },
         {
+          "$$hashKey": "object:10159",
           "op": "=",
-          "text": "GREEN",
+          "text": "OK",
           "value": "0"
         },
         {
+          "$$hashKey": "object:10160",
           "op": "=",
-          "text": "GREEN",
+          "text": "OK",
           "value": "1"
         },
         {
+          "$$hashKey": "object:10161",
           "op": "=",
-          "text": "YELLOW",
+          "text": "WARNING",
           "value": "2"
         },
         {
+          "$$hashKey": "object:10162",
           "op": "=",
-          "text": "RED",
+          "text": "FAIL",
           "value": "3"
         }
       ],
@@ -377,7 +385,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 24,
+        "w": 8,
         "x": 0,
         "y": 7
       },
@@ -387,10 +395,12 @@
       "mappingType": 1,
       "mappingTypes": [
         {
+          "$$hashKey": "object:10189",
           "name": "value to text",
           "value": 1
         },
         {
+          "$$hashKey": "object:10190",
           "name": "range to text",
           "value": 2
         }
@@ -414,7 +424,8 @@
       "repeatDirection": "h",
       "scopedVars": {
         "host": {
-          "selected": true,
+          "$$hashKey": "object:10202",
+          "selected": false,
           "text": "log01",
           "value": "log01"
         }
@@ -440,16 +451,235 @@
       "valueFontSize": "80%",
       "valueMaps": [
         {
+          "$$hashKey": "object:10192",
           "op": "=",
           "text": "N/A",
           "value": "null"
         },
         {
+          "$$hashKey": "object:10193",
           "op": "=",
-          "text": "Fail",
+          "text": "FAIL",
           "value": "0"
         },
         {
+          "$$hashKey": "object:10194",
+          "op": "=",
+          "text": "OK",
+          "value": "1"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 8,
+        "y": 7
+      },
+      "id": 79,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:10189",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:10190",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "minSpan": 3,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1529573287627,
+      "repeatPanelId": 12,
+      "scopedVars": {
+        "host": {
+          "$$hashKey": "object:10203",
+          "selected": false,
+          "text": "log02",
+          "value": "log02"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "elasticsearch_up{host=\"$host\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0.5,1",
+      "title": "Elasticsearch@${host}",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:10192",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        },
+        {
+          "$$hashKey": "object:10193",
+          "op": "=",
+          "text": "FAIL",
+          "value": "0"
+        },
+        {
+          "$$hashKey": "object:10194",
+          "op": "=",
+          "text": "OK",
+          "value": "1"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 16,
+        "y": 7
+      },
+      "id": 80,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:10189",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:10190",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "minSpan": 3,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1529573287627,
+      "repeatPanelId": 12,
+      "scopedVars": {
+        "host": {
+          "$$hashKey": "object:10204",
+          "selected": false,
+          "text": "log03",
+          "value": "log03"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "elasticsearch_up{host=\"$host\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0.5,1",
+      "title": "Elasticsearch@${host}",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:10192",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        },
+        {
+          "$$hashKey": "object:10193",
+          "op": "=",
+          "text": "FAIL",
+          "value": "0"
+        },
+        {
+          "$$hashKey": "object:10194",
           "op": "=",
           "text": "OK",
           "value": "1"
@@ -491,7 +721,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 24,
+        "w": 8,
         "x": 0,
         "y": 11
       },
@@ -528,7 +758,8 @@
       "repeatDirection": "h",
       "scopedVars": {
         "host": {
-          "selected": true,
+          "$$hashKey": "object:10202",
+          "selected": false,
           "text": "log01",
           "value": "log01"
         }
@@ -542,7 +773,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(max(elasticsearch_fs_total_total_in_bytes{host=\"$host\"}) - max(elasticsearch_fs_total_available_in_bytes{host=\"$host\"}) )/ max(elasticsearch_fs_total_total_in_bytes{host=\"$host\"})   * 100.0",
+          "expr": "(max(elasticsearch_fs_total_total_in_bytes{host=\"$host\"}) - max(elasticsearch_fs_total_available_in_bytes{host=\"$host\"}) ) / max(elasticsearch_fs_total_total_in_bytes{host=\"$host\"}) * 100.0",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A",
@@ -550,7 +781,197 @@
         }
       ],
       "thresholds": "70,80",
-      "title": "Storage used @${host}",
+      "title": "Storage used@${host}",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "rgba(50, 172, 45, 0.97)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(245, 54, 54, 0.9)"
+      ],
+      "datasource": null,
+      "decimals": 1,
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 8,
+        "y": 11
+      },
+      "id": 81,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "minSpan": 1,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1529573287627,
+      "repeatPanelId": 22,
+      "scopedVars": {
+        "host": {
+          "$$hashKey": "object:10203",
+          "selected": false,
+          "text": "log02",
+          "value": "log02"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "(max(elasticsearch_fs_total_total_in_bytes{host=\"$host\"}) - max(elasticsearch_fs_total_available_in_bytes{host=\"$host\"}) ) / max(elasticsearch_fs_total_total_in_bytes{host=\"$host\"}) * 100.0",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "refId": "A",
+          "step": 40
+        }
+      ],
+      "thresholds": "70,80",
+      "title": "Storage used@${host}",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "rgba(50, 172, 45, 0.97)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(245, 54, 54, 0.9)"
+      ],
+      "datasource": null,
+      "decimals": 1,
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 16,
+        "y": 11
+      },
+      "id": 82,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "minSpan": 1,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1529573287627,
+      "repeatPanelId": 22,
+      "scopedVars": {
+        "host": {
+          "$$hashKey": "object:10204",
+          "selected": false,
+          "text": "log03",
+          "value": "log03"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "(max(elasticsearch_fs_total_total_in_bytes{host=\"$host\"}) - max(elasticsearch_fs_total_available_in_bytes{host=\"$host\"}) ) / max(elasticsearch_fs_total_total_in_bytes{host=\"$host\"}) * 100.0",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "refId": "A",
+          "step": 40
+        }
+      ],
+      "thresholds": "70,80",
+      "title": "Storage used@${host}",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -582,8 +1003,8 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 3,
-        "w": 24,
+        "h": 4,
+        "w": 8,
         "x": 0,
         "y": 14
       },
@@ -620,7 +1041,8 @@
       "repeatDirection": "h",
       "scopedVars": {
         "host": {
-          "selected": true,
+          "$$hashKey": "object:10202",
+          "selected": false,
           "text": "log01",
           "value": "log01"
         }
@@ -642,7 +1064,197 @@
         }
       ],
       "thresholds": "",
-      "title": "JVM Heap size @${host}",
+      "title": "JVM Heap size@${host}",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "max"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)"
+      ],
+      "datasource": null,
+      "decimals": 1,
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 14
+      },
+      "id": 83,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "minSpan": 1,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1529573287627,
+      "repeatPanelId": 36,
+      "scopedVars": {
+        "host": {
+          "$$hashKey": "object:10203",
+          "selected": false,
+          "text": "log02",
+          "value": "log02"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "max(elasticsearch_jvm_mem_heap_used_percent{host=\"$host\"})",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "refId": "A",
+          "step": 40
+        }
+      ],
+      "thresholds": "",
+      "title": "JVM Heap size@${host}",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "max"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)"
+      ],
+      "datasource": null,
+      "decimals": 1,
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 14
+      },
+      "id": 84,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "minSpan": 1,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1529573287627,
+      "repeatPanelId": 36,
+      "scopedVars": {
+        "host": {
+          "$$hashKey": "object:10204",
+          "selected": false,
+          "text": "log03",
+          "value": "log03"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "max(elasticsearch_jvm_mem_heap_used_percent{host=\"$host\"})",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "refId": "A",
+          "step": 40
+        }
+      ],
+      "thresholds": "",
+      "title": "JVM Heap size@${host}",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -674,9 +1286,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 24,
+        "w": 8,
         "x": 0,
-        "y": 17
+        "y": 18
       },
       "id": 24,
       "interval": null,
@@ -711,7 +1323,8 @@
       "repeatDirection": "h",
       "scopedVars": {
         "host": {
-          "selected": true,
+          "$$hashKey": "object:10202",
+          "selected": false,
           "text": "log01",
           "value": "log01"
         }
@@ -733,7 +1346,7 @@
         }
       ],
       "thresholds": "",
-      "title": "Total documents @${host}",
+      "title": "Total documents@${host}",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -765,9 +1378,197 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 24,
+        "w": 8,
+        "x": 8,
+        "y": 18
+      },
+      "id": 85,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "minSpan": 1,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1529573287627,
+      "repeatPanelId": 24,
+      "scopedVars": {
+        "host": {
+          "$$hashKey": "object:10203",
+          "selected": false,
+          "text": "log02",
+          "value": "log02"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "max(elasticsearch_indices_docs_count{host=\"$host\"})",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "refId": "A",
+          "step": 40
+        }
+      ],
+      "thresholds": "",
+      "title": "Total documents@${host}",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 16,
+        "y": 18
+      },
+      "id": 86,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "minSpan": 1,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1529573287627,
+      "repeatPanelId": 24,
+      "scopedVars": {
+        "host": {
+          "$$hashKey": "object:10204",
+          "selected": false,
+          "text": "log03",
+          "value": "log03"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "max(elasticsearch_indices_docs_count{host=\"$host\"})",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "refId": "A",
+          "step": 40
+        }
+      ],
+      "thresholds": "",
+      "title": "Total documents@${host}",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
         "x": 0,
-        "y": 20
+        "y": 21
       },
       "id": 30,
       "interval": null,
@@ -802,7 +1603,8 @@
       "repeatDirection": "h",
       "scopedVars": {
         "host": {
-          "selected": true,
+          "$$hashKey": "object:10202",
+          "selected": false,
           "text": "log01",
           "value": "log01"
         }
@@ -825,7 +1627,197 @@
         }
       ],
       "thresholds": "",
-      "title": "Total failed indexing @${host}",
+      "title": "Total failed indexing@${host}",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 8,
+        "y": 21
+      },
+      "id": 87,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "minSpan": 1,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1529573287627,
+      "repeatPanelId": 30,
+      "scopedVars": {
+        "host": {
+          "$$hashKey": "object:10203",
+          "selected": false,
+          "text": "log02",
+          "value": "log02"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "avg(elasticsearch_indices_indexing_index_failed{host=\"$host\"})",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 40
+        }
+      ],
+      "thresholds": "",
+      "title": "Total failed indexing@${host}",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 16,
+        "y": 21
+      },
+      "id": 88,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "minSpan": 1,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "repeatIteration": 1529573287627,
+      "repeatPanelId": 30,
+      "scopedVars": {
+        "host": {
+          "$$hashKey": "object:10204",
+          "selected": false,
+          "text": "log03",
+          "value": "log03"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "avg(elasticsearch_indices_indexing_index_failed{host=\"$host\"})",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 40
+        }
+      ],
+      "thresholds": "",
+      "title": "Total failed indexing@${host}",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -843,7 +1835,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 24
       },
       "id": 4,
       "panels": [],
@@ -856,12 +1848,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 0,
-        "y": 24
+        "y": 25
       },
       "id": 16,
       "legend": {
@@ -888,7 +1880,7 @@
       "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
@@ -951,19 +1943,19 @@
         "h": 5,
         "w": 12,
         "x": 12,
-        "y": 24
+        "y": 25
       },
       "id": 18,
       "legend": {
         "alignAsTable": true,
         "avg": false,
-        "current": true,
+        "current": false,
         "max": false,
         "min": false,
         "rightSide": true,
         "show": true,
         "total": false,
-        "values": true
+        "values": false
       },
       "lines": true,
       "linewidth": 1,
@@ -982,18 +1974,20 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:10328",
           "expr": "avg by(host) (elasticsearch_process_open_file_descriptors{host=~\"$host\"})",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Open@{{host}}",
+          "legendFormat": "open @{{host}}",
           "refId": "A",
           "step": 4
         },
         {
+          "$$hashKey": "object:10329",
           "expr": "avg by(host) (elasticsearch_process_max_file_descriptors{host=~\"$host\"})",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Max@{{host}}",
+          "legendFormat": "max @{{host}}",
           "refId": "B",
           "step": 4
         }
@@ -1017,6 +2011,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:10378",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1025,6 +2020,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:10379",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1044,24 +2040,24 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
-        "w": 12,
+        "w": 24,
         "x": 0,
-        "y": 29
+        "y": 30
       },
       "id": 20,
       "legend": {
         "alignAsTable": true,
-        "avg": true,
+        "avg": false,
         "current": false,
         "max": false,
         "min": false,
         "rightSide": true,
         "show": true,
         "total": false,
-        "values": true
+        "values": false
       },
       "lines": true,
       "linewidth": 1,
@@ -1076,7 +2072,7 @@
       "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
@@ -1129,12 +2125,12 @@
       }
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 35
       },
       "id": 2,
       "panels": [],
@@ -1147,12 +2143,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 0,
-        "y": 35
+        "y": 36
       },
       "id": 42,
       "legend": {
@@ -1179,7 +2175,7 @@
       "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
@@ -1187,7 +2183,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "Young@{{host}}",
+          "legendFormat": "young @{{host}}",
           "metric": "elasticsearch_jvm_gc_collectors_young_collection_time_in_millis",
           "refId": "A",
           "step": 2
@@ -1196,7 +2192,7 @@
           "expr": "rate(elasticsearch_jvm_gc_collectors_old_collection_time_in_millis{host=~\"$host\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Old@{{host}}",
+          "legendFormat": "old @{{host}}",
           "metric": "elasticsearch_jvm_gc_collectors_old_collection_time_in_millis",
           "refId": "B",
           "step": 2
@@ -1248,12 +2244,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 12,
-        "y": 35
+        "y": 36
       },
       "id": 40,
       "legend": {
@@ -1284,14 +2280,14 @@
         }
       ],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
           "expr": "avg(elasticsearch_jvm_mem_pools_old_used_in_bytes{host=~\"$host\"}) by (host)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Old@{{host}}",
+          "legendFormat": "old @{{host}}",
           "refId": "C",
           "step": 4
         },
@@ -1299,7 +2295,7 @@
           "expr": "avg(elasticsearch_jvm_mem_pools_survivor_used_in_bytes{host=~\"$host\"}) by (host)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Survivor@{{host}}",
+          "legendFormat": "survivor @{{host}}",
           "refId": "A",
           "step": 4
         },
@@ -1307,7 +2303,7 @@
           "expr": "avg(elasticsearch_jvm_mem_pools_young_used_in_bytes{host=~\"$host\"}) by (host)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Young@{{host}}",
+          "legendFormat": "young @{{host}}",
           "refId": "B",
           "step": 4
         },
@@ -1315,7 +2311,7 @@
           "expr": "avg(elasticsearch_jvm_mem_heap_used_in_bytes{host=~\"$host\"}) by (host)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Heap@{{host}}",
+          "legendFormat": "heap @{{host}}",
           "refId": "D",
           "step": 4
         },
@@ -1323,7 +2319,7 @@
           "expr": "avg(elasticsearch_jvm_mem_heap_max_in_bytes{host=~\"$host\"}) by (host)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Max@{{host}}",
+          "legendFormat": "max @{{host}}",
           "refId": "E",
           "step": 4
         }
@@ -1374,12 +2370,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
-        "w": 12,
+        "w": 24,
         "x": 0,
-        "y": 40
+        "y": 41
       },
       "id": 38,
       "legend": {
@@ -1406,14 +2402,14 @@
       "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
           "expr": "rate(elasticsearch_jvm_gc_collectors_young_collection_count{host=~\"$host\"}[$rate_interval]) * 60",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Young@{{host}}",
+          "legendFormat": "young @{{host}}",
           "refId": "A",
           "step": 2
         },
@@ -1421,7 +2417,7 @@
           "expr": "rate(elasticsearch_jvm_gc_collectors_old_collection_count{host=~\"$host\"}[$rate_interval]) * 60",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Old@{{host}}",
+          "legendFormat": "old @{{host}}",
           "refId": "B",
           "step": 2
         }
@@ -1472,7 +2468,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 45
+        "y": 46
       },
       "id": 64,
       "panels": [],
@@ -1485,12 +2481,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 0,
-        "y": 46
+        "y": 47
       },
       "id": 32,
       "legend": {
@@ -1517,7 +2513,7 @@
       "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
@@ -1580,7 +2576,7 @@
         "h": 5,
         "w": 12,
         "x": 12,
-        "y": 46
+        "y": 47
       },
       "id": 34,
       "legend": {
@@ -1616,7 +2612,7 @@
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "Flush@{{host}}",
+          "legendFormat": "flush @{{host}}",
           "refId": "A",
           "step": 4
         },
@@ -1625,7 +2621,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "Refresh@{{host}}",
+          "legendFormat": "refresh @{{host}}",
           "refId": "B",
           "step": 4
         }
@@ -1676,12 +2672,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 0,
-        "y": 51
+        "y": 52
       },
       "id": 26,
       "legend": {
@@ -1708,7 +2704,7 @@
       "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
@@ -1767,24 +2763,24 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 12,
-        "y": 51
+        "y": 52
       },
       "id": 46,
       "legend": {
         "alignAsTable": true,
-        "avg": true,
+        "avg": false,
         "current": false,
         "max": false,
         "min": false,
         "rightSide": true,
         "show": true,
         "total": false,
-        "values": true
+        "values": false
       },
       "lines": true,
       "linewidth": 1,
@@ -1804,24 +2800,26 @@
         }
       ],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:10506",
           "expr": "elasticsearch_indices_query_cache_memory_size_in_bytes{host=~\"$host\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "Size@{{host}}",
+          "legendFormat": "size @{{host}}",
           "refId": "A",
           "step": 4
         },
         {
+          "$$hashKey": "object:10507",
           "expr": "sum without(status)(rate(elasticsearch_indices_query_cache_evictions{host=~\"$host\"}[$rate_interval])) ",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "Eviction@{{host}}",
+          "legendFormat": "eviction @{{host}}",
           "refId": "B",
           "step": 4
         }
@@ -1872,12 +2870,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 0,
-        "y": 56
+        "y": 57
       },
       "id": 28,
       "legend": {
@@ -1904,7 +2902,7 @@
       "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
@@ -1912,7 +2910,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "Merges@{{host}}",
+          "legendFormat": "merges @{{host}}",
           "refId": "A",
           "step": 4
         },
@@ -1921,7 +2919,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "Flush@{{host}}",
+          "legendFormat": "flush @{{host}}",
           "refId": "B",
           "step": 4
         },
@@ -1929,7 +2927,7 @@
           "expr": "max(rate(elasticsearch_indices_refresh_total{host=~\"$host\"}[$rate_interval])) without (node_id)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Refresh@{{host}}",
+          "legendFormat": "refresh @{{host}}",
           "refId": "C",
           "step": 4
         }
@@ -1980,18 +2978,18 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 12,
-        "y": 56
+        "y": 57
       },
       "id": 44,
       "legend": {
         "alignAsTable": true,
-        "avg": true,
-        "current": false,
+        "avg": false,
+        "current": true,
         "max": false,
         "min": false,
         "rightSide": true,
@@ -2012,7 +3010,7 @@
       "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
@@ -2071,24 +3069,24 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 0,
-        "y": 61
+        "y": 62
       },
       "id": 50,
       "legend": {
         "alignAsTable": true,
-        "avg": true,
+        "avg": false,
         "current": false,
         "max": false,
         "min": false,
         "rightSide": true,
         "show": true,
         "total": false,
-        "values": true
+        "values": false
       },
       "lines": true,
       "linewidth": 1,
@@ -2108,7 +3106,7 @@
         }
       ],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
@@ -2116,7 +3114,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "Size@{{host}}",
+          "legendFormat": "size @{{host}}",
           "refId": "A",
           "step": 4
         },
@@ -2125,7 +3123,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "Eviction@{{host}}",
+          "legendFormat": "eviction @{{host}}",
           "refId": "B",
           "step": 4
         }
@@ -2176,12 +3174,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "fill": 4,
+      "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 12,
-        "y": 61
+        "y": 62
       },
       "id": 48,
       "legend": {
@@ -2208,14 +3206,14 @@
       "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
           "expr": "max(elasticsearch_indices_search_query_latency{host=~\"$host\"})by (host)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Search@{{host}}",
+          "legendFormat": "search @{{host}}",
           "refId": "A",
           "step": 4
         },
@@ -2223,7 +3221,7 @@
           "expr": "max(elasticsearch_indices_search_fetch_latency{host=~\"$host\"}) by (host)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "Fetch@{{host}}",
+          "legendFormat": "fetch @{{host}}",
           "refId": "B",
           "step": 4
         }
@@ -2278,9 +3276,11 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "log01",
-          "value": "log01"
+          "tags": [],
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": null,
         "hide": 0,
@@ -2304,16 +3304,15 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": true,
-          "text": "1m",
-          "value": "1m"
+          "text": "3m",
+          "value": "3m"
         },
         "hide": 0,
         "label": null,
         "name": "rate_interval",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "1m",
             "value": "1m"
           },
@@ -2321,6 +3320,11 @@
             "selected": false,
             "text": "2m",
             "value": "2m"
+          },
+          {
+            "selected": true,
+            "text": "3m",
+            "value": "3m"
           },
           {
             "selected": false,
@@ -2338,7 +3342,7 @@
             "value": "15m"
           }
         ],
-        "query": "1m,2m,5m,10m,15m",
+        "query": "1m,2m,3m,5m,10m,15m",
         "refresh": 2,
         "type": "interval"
       }
