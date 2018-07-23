@@ -85,7 +85,7 @@ server:
         severity: minor
         service: elasticsearch
       annotations:
-        summary: "Elasticsearch uses {%- endraw %}{{monitoring.service_failed_warning_threshold_percent*100}}%{%- raw %} of disk space"
+        summary: "Elasticsearch uses {%- endraw %} {{monitoring.service_disk_space_watermark_minor_threshold_percent*100}}%{%- raw %} of disk space"
         description: "The Elasticsearch '{{ $labels.instance }}' instance uses {{ $value }}% of disk space on the {{ $labels.host }} node for 5 minutes."
   {%- endraw %}
     ElasticsearchDiskWaterMarkMajor:
@@ -97,7 +97,7 @@ server:
         severity: major
         service: elasticsearch
       annotations:
-        summary: "Elasticsearch uses {%- endraw %}{{monitoring.service_failed_critical_threshold_percent*100}}%{%- raw %} of disk space"
+        summary: "Elasticsearch uses {%- endraw %} {{monitoring.service_disk_space_watermark_major_threshold_percent*100}}%{%- raw %} of disk space"
         description: "The Elasticsearch '{{ $labels.instance }}' instance uses {{ $value }}% of disk space on the {{ $labels.host }} node for 5 minutes."
   {%- endraw %}
 {%- endif %}
