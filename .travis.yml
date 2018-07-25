@@ -17,18 +17,26 @@ install:
   - bundle install
 
 env:
-    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-xenial-salt-2016.3 SUITE=single
-    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-xenial-salt-2016.3 SUITE=cluster
-    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-xenial-salt-2016.3 SUITE=curator
-    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-xenial-salt-2016.3 SUITE=client
-    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-xenial-salt-2017.7 SUITE=single
-    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-xenial-salt-2017.7 SUITE=cluster
-    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-xenial-salt-2017.7 SUITE=curator
-    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-xenial-salt-2017.7 SUITE=client
-#    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-bionic-salt-2017.7 SUITE=single
-#    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-bionic-salt-2017.7 SUITE=cluster
-#    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-bionic-salt-2017.7 SUITE=curator
-#    - PLATFORM=epcim/salt-formulas:saltstack-ubuntu-bionic-salt-2017.7 SUITE=client
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2016.3 SUITE=single
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2016.3 SUITE=cluster
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2016.3 SUITE=curator
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2016.3 SUITE=client
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2017.7 SUITE=single
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2017.7 SUITE=cluster
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2017.7 SUITE=curator
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2017.7 SUITE=client
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2018.3 SUITE=single
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2018.3 SUITE=cluster
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2018.3 SUITE=curator
+    - PLATFORM=epcim/salt:saltstack-ubuntu-xenial-salt-2018.3 SUITE=client
+#    - PLATFORM=epcim/salt:saltstack-ubuntu-bionic-salt-2017.7 SUITE=single
+#    - PLATFORM=epcim/salt:saltstack-ubuntu-bionic-salt-2017.7 SUITE=cluster
+#    - PLATFORM=epcim/salt:saltstack-ubuntu-bionic-salt-2017.7 SUITE=curator
+#    - PLATFORM=epcim/salt:saltstack-ubuntu-bionic-salt-2017.7 SUITE=client
+#    - PLATFORM=epcim/salt:saltstack-ubuntu-bionic-salt-2018.3 SUITE=single
+#    - PLATFORM=epcim/salt:saltstack-ubuntu-bionic-salt-2018.3 SUITE=cluster
+#    - PLATFORM=epcim/salt:saltstack-ubuntu-bionic-salt-2018.3 SUITE=curator
+#    - PLATFORM=epcim/salt:saltstack-ubuntu-bionic-salt-2018.3 SUITE=client
 
 before_script:
   - set -o pipefail
