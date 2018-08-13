@@ -9,25 +9,25 @@ agent:
             tag: elasticsearch.general
             path: /var/log/elasticsearch/elasticsearch.log
             pos_file: {{ pillar.fluentd.agent.dir.positiondb }}/elasticsearch.general.pos
-            format: '/^\[(?<time>[^ ]* [^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] \[([^\]]*) *\] (?<Payload>.+)/'
+            format: '/^\[(?<time>[^ ]* ?[^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] \[([^\]]*) *\] (?<Payload>.+)/'
           tail_elasticsearch_deprecation:
             type: tail
             tag: elasticsearch.deprecation
             path: /var/log/elasticsearch/elasticsearch_deprecation.log
             pos_file: {{ pillar.fluentd.agent.dir.positiondb }}/elasticsearch.deprecation.pos
-            format: '/^\[(?<time>[^ ]* [^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] (?<Payload>.+)/'
+            format: '/^\[(?<time>[^ ]* ?[^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] (?<Payload>.+)/'
           tail_elasticsearch_index_indexing_slowlog:
             type: tail
             tag: elasticsearch.slowlog.indexing
             path: /var/log/elasticsearch/elasticsearch_index_indexing_slowlog.log
             pos_file: {{ pillar.fluentd.agent.dir.positiondb }}/elasticsearch.slowlog.indexing.pos
-            format: '/^\[(?<time>[^ ]* [^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] (?<Payload>.+)/'
+            format: '/^\[(?<time>[^ ]* ?[^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] (?<Payload>.+)/'
           tail_elasticsearch_index_search_slowlog:
             type: tail
             tag: elasticsearch.slowlog.search
             path: /var/log/elasticsearch/elasticsearch_index_search_slowlog.log
             pos_file: {{ pillar.fluentd.agent.dir.positiondb }}/elasticsearch.slowlog.search.pos
-            format: '/^\[(?<time>[^ ]* [^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] (?<Payload>.+)/'
+            format: '/^\[(?<time>[^ ]* ?[^ ]*)\]\[(?<severity_label>[^ ]*) *?\]\[([^ ]*) *\] (?<Payload>.+)/'
         filter:
           match_severity:
             type: record_transformer
