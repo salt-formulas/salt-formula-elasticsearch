@@ -13,6 +13,17 @@ include:
 {%- endif %}
 
 {%- for index_name, index in client.get('index', {}).iteritems() %}
+# TODO: "Replace with module.run when bug is fixed".
+# Since bug in retry logic in salt (#49895) we need to use a workaround for now.
+elasticsearch_check_cluster_status_before_creating_index_{{ index_name }}:
+  cmd.run:
+  - name: curl -sf {{ client.server.host }}:{{ client.server.port }}/_cat/health | awk '{print $4}' | grep green
+  - retry:
+      attempts: 5
+      until: True
+      interval: 10
+      splay: 5
+
 elasticsearch_index_{{ index_name }}:
 
   {%- if index.get('enabled', False) %}
