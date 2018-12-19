@@ -20,8 +20,8 @@
 # Xms represents the initial size of total heap space
 # Xmx represents the maximum size of total heap space
 
--Xms{{ server.get('heap', {}).get('size', grains.get('mem_total', 1024)/2/1024)|round(0, 'ceil')|int }}g
--Xmx{{ server.get('heap', {}).get('size', grains.get('mem_total', 1024)/2/1024)|round(0, 'ceil')|int }}g
+-Xms{{ server.get('start_mem', {}).get('size', grains.get('mem_total', 1024)/2/1024)|round(0, 'ceil')|int }}g
+-Xmx{{ server.get('max_mem', {}).get('size', grains.get('mem_total', 1024)/2/1024)|round(0, 'ceil')|int }}g
 
 ################################################################
 ## Expert settings
